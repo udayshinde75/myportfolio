@@ -1,7 +1,7 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-import Navbar from "@/components/custom/Navbar";
+import Navbar from "@/components/custom/navbar/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export default function RootLayout({
   children,
@@ -27,13 +27,28 @@ export default function RootLayout({
     const y = (e.clientY / window.innerHeight) * 100;
     setCursorPos({ x, y });
   };
+
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("theme") || "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    if (theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [theme]);
   return (
     <html lang="en">
       <body>
       <Navbar />
         <div
           onMouseMove={handleMouseMove}
-          className="flex h-screen items-center justify-center flex-col relative overflow-hidden bg-gradient-to-br from-gray-700 via-gray-400 to-gray-600 pt-16"
+          className="transition-colors duration-1000 flex h-full items-center justify-center flex-col relative overflow-hidden bg-gradient-to-br from-gray-200 dark:from-gray-700 via-gray-200 dark:via-gray-500 to-gray-200 dark:to-gray-600 py-16"
         >
           {/* Cursor glow */}
           <div
