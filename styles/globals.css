@@ -8,6 +8,10 @@
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
 
+body {
+  @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300;
+}
+
 .main {
   width: 100vw;
   min-height: 100vh;
