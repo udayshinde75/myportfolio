@@ -6,11 +6,19 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/custom/navbar/NavLink"
 import NavItem from "./NavItem";
-import {Home, Info, Briefcase, Mail, FolderOpen } from "lucide-react";
+import {Home, Info, Briefcase, Mail, FolderOpen, User, Key } from "lucide-react";
 import ThemeToggle from "@/components/custom/navbar/ThemeToggle";
 import { motion } from "framer-motion";
 
-export default function Navbar() {
+interface ProfileProps {
+  Name: string;
+  id: string;
+}
+
+export default function Navbar({
+  Name,
+  id,
+}: ProfileProps) {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 
@@ -33,18 +41,22 @@ export default function Navbar() {
         <div className="container mx-auto flex items-center justify-between w-full p-4">
           {/* Logo */}
           <Link href="/" className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
-            FluidDev
+            {Name}
           </Link>
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center justify-between space-x-6">
-            <NavLink href="/" label="Home"/>
+          <div className="hidden md:flex items-center justify-between space-x-4">
+            <NavLink href={`/${id}`} label="Home"/>
             <NavLink href="/about" label="About" />
             <NavLink href="/services" label="Services" />
             <NavLink href="/projects" label="My Projects" />
             <NavLink href="/contact" label="Contact" />
+            <NavItem href="/auth/signup" icon={<User />}  theme={theme} />
+            <NavItem href="/auth/generate-passkey" icon={<Key />}  theme={theme} />
             <ThemeToggle />
           </div>
-          <div className="md:hidden">
+          <div className="space-x-6 md:hidden flex items-center justify-between">
+            <NavItem href="/auth/signup" icon={<User />}  theme={theme} />
+            <NavItem href="/auth/generate-passkey" icon={<Key />}  theme={theme} />
             <ThemeToggle />
           </div>
         </div>
