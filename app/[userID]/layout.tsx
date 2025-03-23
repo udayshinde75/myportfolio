@@ -20,32 +20,46 @@ export default function RootLayout({
   params,
 }: {
   children: ReactNode;
-  params: { userID?: string };
+  params: Promise<{ userID?: string }>;
 }) {
-  const userID = params?.userID || ""; // Show your portfolio if no userID
-  console.log("userID1:"+userID)
+  const [userID, setUserID] = useState<string>("");
+
+  useEffect(() => {
+    async function fetchParams() {
+      const resolvedParams = await params;
+      setUserID(resolvedParams?.userID || "");
+    }
+    fetchParams();
+  }, [params]);
+
   const [user, setUser] = useState({
     name: "",
     email:"",
-    id: "",
+    id:"",
   });
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch("/api/auth/getUserByID"); // No userID
-        if (!res.ok) throw new Error("User not found");
-        const data = await res.json();
-        setUser(data);
-        console.log("Default UserID : " + user.id)
-        console.log("Default name : " + user.name)
-      } catch (error) {
-        console.error(error);
-      }
+      if (!userID) return;
+      const res = await fetch(`/api/auth/getUserByID?userID=${userID}`);
+      const data = await res.json();
+      setUser(data);
     };
 
     fetchData();
-  }, []);
+  }, [userID]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        const res = await fetch(`/api/auth/getUserByID?userID=${userID}`);
+        console.log("res:"+res)
+        const data = await res.json();
+        console.log("data:"+data)
+        setUser(data);
+    };
+
+    fetchData();
+  }, [userID]);
   
 
   const [cursorPos, setCursorPos] = useState({ x: 50, y: 50 });
@@ -70,8 +84,6 @@ export default function RootLayout({
       document.documentElement.classList.remove("dark");
     }
   }, [theme]);
-
-  
 
   return (
     <html lang="en">

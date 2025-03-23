@@ -3,13 +3,16 @@ import Profile from "@/components/custom/herosection/Profile";
 import ProfileActions from "@/components/custom/herosection/ProfileActions";
 import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home({ params }: { params: { userID?: string } }) {
+  const userID = params?.userID || ""; // If no userID, use default user
+  console.log("UserID:", userID);
+
   const [user, setUser] = useState<{ name: string }>({ name: "" });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("/api/auth/getUserByID"); // No userID
+        const res = await fetch(`/api/auth/getUserByID?userID=${userID}`);
         if (!res.ok) throw new Error("User not found");
         const data = await res.json();
         setUser(data);
@@ -19,7 +22,7 @@ export default function Home() {
     };
 
     fetchData();
-  }, []);
+  }, [userID]);
 
   return (
     <section className="w-full h-full flex-center flex-col">

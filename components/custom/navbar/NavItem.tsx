@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 
 // Reusable Floating Navbar Item
-export default function NavItem({ href, icon, label, theme }: { href: string; icon: React.ReactNode; label: string; theme: string }) {
+export default function NavItem({ href, icon, label, theme }: { href: string; icon: React.ReactNode; label?: string; theme: string }) {
     return (
       <Link href={href} className="flex flex-col items-center transition">
         <motion.div
