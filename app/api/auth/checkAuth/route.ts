@@ -10,8 +10,8 @@ export const GET = async () => {
     if (!token) {
       console.error("No token provided");
       return NextResponse.json(
-        { authenticated: false, error: "No token provided" },
-        { status: 401 }
+        { authenticated: false },
+        { status: 200 }
       );
     }
 
@@ -22,8 +22,8 @@ export const GET = async () => {
     } catch (error) {
       console.error("Token verification error:", error);
       return NextResponse.json(
-        { authenticated: false, error: "Invalid or expired token" },
-        { status: 401 }
+        { authenticated: false },
+        { status: 200 }
       );
     }
 
@@ -31,8 +31,8 @@ export const GET = async () => {
   } catch (error) {
     console.error("Auth check error:", error);
     return NextResponse.json(
-      { authenticated: false, error: "Server error" },
-      { status: 500 }
+        { authenticated: false },
+        { status: 200 }
     );
   }
 };
