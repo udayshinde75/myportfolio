@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/custom/auth/form-error";
 import { FormSuccess } from "@/components/custom/auth/form-success";
+import { motion } from "framer-motion";
 
 // Corrected API call function
 const registerUser = async (data: {
@@ -72,7 +73,12 @@ export const RegisterForm = () => {
     };
 
     return (
-        <CardWrapper
+        <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        >
+            <CardWrapper
             headerLabel="Create an account"
             backButtonLabel="Already have an account?"
             backButtonHref="/auth/signin"
@@ -144,6 +150,8 @@ export const RegisterForm = () => {
                 </form>
             </Form>
         </CardWrapper>
+        </motion.div>
+        
     );
 };
 

@@ -8,7 +8,7 @@ export const GET = async (req: Request) => {
     console.log("Entered In getuserbyid:");
     await connectToDB();
     const url = new URL(req.url);
-    console.log(url);
+    //console.log(url);
 
     const userID = url.searchParams.get("userID"); // ⚠️ Can be null
 
@@ -19,10 +19,10 @@ export const GET = async (req: Request) => {
       console.log("No userID provided, returning default user.");
       
       // 🔥 Fetch the default user (e.g., owner)
-      const objectId = new mongoose.Types.ObjectId(process.env.owner);
+      const objectId = new mongoose.Types.ObjectId(process.env.NEXT_PUBLIC_OWNER);
       const defaultUser = await User.findById(objectId);
 
-      console.log("Default UserID:", defaultUser);
+      //console.log("Default UserID:", defaultUser);
       
       if (!defaultUser) {
         return NextResponse.json({ error: "Default user not found" }, { status: 404 });
@@ -41,7 +41,7 @@ export const GET = async (req: Request) => {
       return NextResponse.json({ error: "Invalid User ID format" }, { status: 400 });
     }
 
-    console.log("User Finding By ID...");
+    //console.log("User Finding By ID...");
 
     // ✅ Convert to ObjectId safely
     const objectId = new mongoose.Types.ObjectId(userID);

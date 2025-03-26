@@ -17,37 +17,9 @@ import { ReactNode, useEffect, useState } from "react";
 
 export default function RootLayout({
   children,
-  params,
 }: {
   children: ReactNode;
-  params: { userID?: string };
 }) {
-  const userID = params?.userID || ""; // Show your portfolio if no userID
-  console.log("userID1:"+userID)
-  const [user, setUser] = useState({
-    name: "",
-    email:"",
-    id: "",
-  });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/auth/getUserByID"); // No userID
-        if (!res.ok) throw new Error("User not found");
-        const data = await res.json();
-        setUser(data);
-        console.log("Default UserID : " + user.id)
-        console.log("Default name : " + user.name)
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-  
-
   const [cursorPos, setCursorPos] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -76,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar Name={user.name} id={user.id}/>
+        
         <div
           onMouseMove={handleMouseMove}
           className="transition-colors duration-1000 flex h-full items-center justify-center flex-col relative overflow-hidden bg-gradient-to-br from-gray-200 dark:from-gray-700 via-gray-200 dark:via-gray-500 to-gray-200 dark:to-gray-600 py-12 pb-32"

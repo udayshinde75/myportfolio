@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/custom/auth/form-error";
 import { FormSuccess } from "@/components/custom/auth/form-success";
+import { motion } from "framer-motion";
 
 export const login = async (data: { email: string; password: string}) => {
     try {
@@ -63,6 +64,11 @@ export const LoginForm = () => {
     };
 
     return (
+        <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        >
         <CardWrapper
             headerLabel="Log in to manage your portfolio"
             backButtonLabel="Don't have an account?"
@@ -111,6 +117,7 @@ export const LoginForm = () => {
                 </form>
             </Form>
         </CardWrapper>
+        </motion.div>
     );
 }
 
