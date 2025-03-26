@@ -3,7 +3,6 @@
 import RegisterForm from "@/components/custom/auth/register-form";
 import SimpleFooter from "@/components/custom/footer/SimpleFooter";
 import Navbar from "@/components/custom/navbar/Navbar";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Home() {

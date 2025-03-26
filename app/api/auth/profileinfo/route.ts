@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 const JWT_SECRET = process.env.JWT_SECRET || "your-secure-secret-key";
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
     try {
         await connectToDB();
 
@@ -31,6 +31,7 @@ export const GET = async (req: Request) => {
             return NextResponse.json({ error: "Invalid token" }, { status: 403 });
         }
     } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: "Invalid token" }, { status: 403 });
     }
 };

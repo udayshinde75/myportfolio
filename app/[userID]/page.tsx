@@ -5,10 +5,6 @@ import Navbar from "@/components/custom/navbar/Navbar";
 import { useEffect, useState } from "react";
 
 export default function Home({ params }: { params: Promise<{ userID?: string }>; }) {
-  const [userID, setUserID] = useState<string>("");
-
-  console.log("UserID:", userID);
-
   const [user, setUser] = useState<{
     name: string;
     email: string;
