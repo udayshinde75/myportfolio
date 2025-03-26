@@ -13,7 +13,7 @@ export default function Home() {
   });
 
   // Set the default userID from the environment variable if userID is empty
-  const userID = process.env.NEXT_PUBLIC_OWNER || "";
+  //const userID = process.env.NEXT_PUBLIC_OWNER || "";
 
   useEffect(() => {
     const fetchData = async () => {

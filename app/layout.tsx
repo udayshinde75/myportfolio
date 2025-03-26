@@ -1,17 +1,6 @@
 "use client";
 import { Geist, Geist_Mono } from "next/font/google";
 import "@/styles/globals.css";
-import Navbar from "@/components/custom/navbar/Navbar";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 import { ReactNode, useEffect, useState } from "react";
 
@@ -28,20 +17,21 @@ export default function RootLayout({
     setCursorPos({ x, y });
   };
 
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("theme") || "light";
-    }
-    return "light";
-  });
+  // const [theme, setTheme] = useState(() => {
+  //   if (typeof window !== "undefined") {
+  //     return localStorage.getItem("theme") || "light";
+  //   }
+  //   return "light";
+  // });
 
   useEffect(() => {
+    const theme = localStorage.getItem("theme") || "light";
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
     }
-  }, [theme]);
+  }, []);
 
   
 

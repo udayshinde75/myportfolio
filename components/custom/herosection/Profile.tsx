@@ -1,10 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
-import Link from "next/link";
 
 interface ProfileProps {
     Name: string;
@@ -69,7 +67,6 @@ export default function Profile({
           <p className="text-muted-foreground mt-2 px-6 md:text-lg text-sm max-w-2xl mx-auto">
             I've spent my entire life in Pune, Maharashtra, with a strong passion for technology and problem-solving. From an early age, I excelled in academics and developed a deep interest in coding, constantly challenging myself to build efficient and impactful solutions. I enjoy exploring new ideas, experimenting with different frameworks, diving into machine learning and AI models, and analyzing data for insights. Beyond development, I am always eager to learn and refine my skills in software engineering and scalable web applications. Through my work, I strive to contribute to the tech community while continuously evolving as an engineer.
           </p>
-          
         </div>
       </motion.div>
     </section>

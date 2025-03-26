@@ -41,6 +41,7 @@ const registerUser = async (data: {
 
         return { success: result.success };
     } catch (error) {
+        console.log(error);
         return { error: "Something went wrong, please try again later." };
     }
 };
