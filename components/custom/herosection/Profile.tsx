@@ -11,7 +11,10 @@ interface ProfileProps {
 export default function Profile({
     Name
 }: ProfileProps) {
-    console.log("Name:"+Name)
+    console.log("Name:"+Name);
+    
+    const aboutMeText = `I&apos;ve spent my entire life in Pune, Maharashtra, with a strong passion for technology and problem-solving. From an early age, I excelled in academics and developed a deep interest in coding, constantly challenging myself to build efficient and impactful solutions. I enjoy exploring new ideas, experimenting with different frameworks, diving into machine learning and AI models, and analyzing data for insights. Beyond development, I am always eager to learn and refine my skills in software engineering and scalable web applications. Through my work, I strive to contribute to the tech community while continuously evolving as an engineer.`;
+
   return (
     <section className="pt-16 pb-5 flex flex-col items-center text-center">
       {/* Hero Image */}
@@ -26,8 +29,10 @@ export default function Profile({
           alt="Hero Image"
           fill
           className="object-cover"
+          priority
         />
       </motion.div>
+      
       {/* Hero Text */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -36,7 +41,7 @@ export default function Profile({
         className="mt-6 max-w-full overflow-x-auto"
       >
         <h1 className="text-4xl sm:text-5xl font-bold leading-tight whitespace-nowrap">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r  from-gray-700 dark:from-gray-200 via-gray-500 dark:via-gray-200 to-gray-600 dark:to-gray-200 pt-16">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-700 dark:from-gray-200 via-gray-500 dark:via-gray-200 to-gray-600 dark:to-gray-200 pt-16">
             Hello, I&apos;m{" "}
           </span>
           <br />
@@ -61,9 +66,13 @@ export default function Profile({
             className="text-primary inline-block"
           />
         </h1>
+        
         <div className="mt-6">
           <h2 className="text-2xl font-semibold">About Me</h2>
-          <p className="text-muted-foreground mt-2 px-6 md:text-lg text-sm max-w-2xl mx-auto">I've spent my entire life in Pune, Maharashtra, with a strong passion for technology and problem-solving. From an early age, I excelled in academics and developed a deep interest in coding, constantly challenging myself to build efficient and impactful solutions. I enjoy exploring new ideas, experimenting with different frameworks, diving into machine learning and AI models, and analyzing data for insights. Beyond development, I am always eager to learn and refine my skills in software engineering and scalable web applications. Through my work, I strive to contribute to the tech community while continuously evolving as an engineer.</p>
+          <p 
+            className="text-muted-foreground mt-2 px-6 md:text-lg text-sm max-w-2xl mx-auto"
+            dangerouslySetInnerHTML={{ __html: aboutMeText }}
+          />
         </div>
       </motion.div>
     </section>
