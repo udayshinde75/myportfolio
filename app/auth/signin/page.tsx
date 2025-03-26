@@ -2,7 +2,7 @@
 
 import LoginForm from "@/components/custom/auth/login-form";
 import SimpleFooter from "@/components/custom/footer/SimpleFooter";
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 
 export default function Home() {
   // const [user, setUser] = useState({

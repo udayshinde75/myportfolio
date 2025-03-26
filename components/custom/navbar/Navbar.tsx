@@ -17,7 +17,6 @@ export default function Navbar({
   Name,
   id,
 }: ProfileProps) {
-  const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -48,24 +47,24 @@ export default function Navbar({
             <NavLink href={`/services/${id}`} label="Services" />
             <NavLink href={`/projects/${id}`} label="My Projects" />
             <NavLink href={`/contact/${id}`} label="Contact" />
-            <NavItem href={`/auth/signup/${id}`} icon={<User />}  theme={theme} />
-            <NavItem href="/auth/generate-passkey" icon={<Key />}  theme={theme} />
+            <NavItem href={`/auth/signup/${id}`} icon={<User />} />
+            <NavItem href="/auth/generate-passkey" icon={<Key />} />
             <ThemeToggle />
           </div>
           <div className="space-x-6 md:hidden flex items-center justify-between">
-            <NavItem href="/auth/signup" icon={<User />}  theme={theme} />
-            <NavItem href="/auth/generate-passkey" icon={<Key />}  theme={theme} />
+            <NavItem href="/auth/signup" icon={<User />} />
+            <NavItem href="/auth/generate-passkey" icon={<Key />} />
             <ThemeToggle />
           </div>
         </div>
       </motion.nav>
 
       <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] border border-gray-500 shadow-lg rounded-3xl flex justify-around p-3 md:hidden backdrop-blur-xl bg-opacity-80 z-50">
-        <NavItem href="/services" icon={<Briefcase />} label="Services" theme={theme} />
-        <NavItem href="/about" icon={<Info />} label="About" theme={theme} />
-        <NavItem href="/" icon={<Home />} label="Home" theme={theme} />
-        <NavItem href="/contact" icon={<Mail />} label="Contact" theme={theme} />
-        <NavItem href="/projects" icon={<FolderOpen />} label="Projects" theme={theme} />
+        <NavItem href="/services" icon={<Briefcase />} label="Services"/>
+        <NavItem href="/about" icon={<Info />} label="About"/>
+        <NavItem href="/" icon={<Home />} label="Home" />
+        <NavItem href="/contact" icon={<Mail />} label="Contact" />
+        <NavItem href="/projects" icon={<FolderOpen />} label="Projects" />
         
       </div>
     </>
