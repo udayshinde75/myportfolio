@@ -76,10 +76,10 @@ export default function SignUpPage({ params }: { params: Promise<{ userID?: stri
           },
         });
 
-        if (!authResponse.ok) {
-          console.error("Authentication service unavailable");
-          return;
-        }
+        // if (!authResponse.ok) {
+        //   console.error("Authentication service unavailable");
+        //   return;
+        // }
 
         const authData: AuthResponse = await authResponse.json();
 
