@@ -3,10 +3,7 @@ import { connectToDB } from "@/utils/database";
 import { User } from "@/models/user";
 import { Passkey } from "@/models/passkey";
 import bcrypt from "bcryptjs";
-import * as z from "zod";
 import { RegisterSchema } from "@/schemas";
-
-const ADMIN_PASSKEY = process.env.ADMIN_PASSKEY; // Admin secret passkey
 
 export const POST = async (req: Request) => {
     try {

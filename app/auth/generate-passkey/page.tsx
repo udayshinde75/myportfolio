@@ -27,6 +27,7 @@ const GeneratePasskey = () => {
                 setError(data.error || "Failed to generate passkey");
             }
         } catch (err) {
+            console.log(err);
             setError("Something went wrong. Try again!");
         } finally {
             setLoading(false);
