@@ -18,7 +18,7 @@ export default function Navbar({
   id,
 }: ProfileProps) {
   const [theme, setTheme] = useState("light");
-
+  console.log(theme)
   useEffect(() => {
     setTheme(localStorage.getItem("theme") || "light");
 
