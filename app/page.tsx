@@ -1,10 +1,11 @@
 "use client";
 import Profile from "@/components/custom/herosection/Profile";
 import ProfileActions from "@/components/custom/herosection/ProfileActions";
+import Navbar from "@/components/custom/navbar/Navbar";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState<{ name: string }>({ name: "" });
+  const [user, setUser] = useState<{ name: string, id: string }>({ name: "", id: "" });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,16 +22,21 @@ export default function Home() {
     fetchData();
   }, []);
 
-  return (
-    <section className="w-full h-full flex-center flex-col">
-      {user.name ? (
+  if (user.name) {
+    return (
         <>
-          <Profile Name={user.name} />
-          <ProfileActions ReadMore={true} />
+            <Navbar Name={user.name} id={user.id}/>
+            <section className="w-full h-full flex-center flex-col">
+            <Profile Name={user.name} />
+            <ProfileActions ReadMore={true} />
+            </section>
         </>
-      ) : (
-        <p>Loading user...</p>
-      )}
-    </section>
-  );
+      );
+  } else {
+    return (
+        <section className="w-full h-[100vh] flex-center flex-col">
+          <p>Loading...</p>
+        </section>
+      );
+  }
 }

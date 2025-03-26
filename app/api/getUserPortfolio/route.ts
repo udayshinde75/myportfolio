@@ -12,11 +12,11 @@ export const GET = async (req: Request) => {
         console.log("UserID:" +userID);
 
         if (userID === "") {
-            const user = await User.findById(process.env.owner);
+            const user = await User.findById(process.env.NEXT_PUBLIC_OWNER);
             if (!user) {
                 return NextResponse.json({ error: "User not found" }, { status: 404 });
             }
-            console.log("UserID:" + process.env.owner );
+            console.log("UserID:" + process.env.NEXT_PUBLIC_OWNER );
             return NextResponse.json({
                 name: user.name,
             });
@@ -31,7 +31,9 @@ export const GET = async (req: Request) => {
 
         return NextResponse.json({
             name: user.name,
+
         });
+        
     } catch (error) {
         return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
     }

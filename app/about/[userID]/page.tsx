@@ -3,7 +3,7 @@ import ProfileActions from "@/components/custom/herosection/ProfileActions";
 export default function AboutPage() {
   return (
     <section className="container mx-auto px-6 py-16 text-center">
-      <Profile Name="uday"/>
+      <Profile Name="{user} "/>
       <ProfileActions ReadMore={false}/>
     </section>
   );

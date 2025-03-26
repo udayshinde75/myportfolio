@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import NavLink from "@/components/custom/navbar/NavLink"
 import NavItem from "./NavItem";
 import {Home, Info, Briefcase, Mail, FolderOpen, User, Key } from "lucide-react";
@@ -34,23 +32,23 @@ export default function Navbar({
     <>
       {/* Top Navbar (Desktop & Mobile) */}
       <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 3, ease: "easeOut" }}
-       className="fixed top-2 left-1/2 transform -translate-x-1/2 w-[90%] md:w-[90%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between  backdrop-blur-xl bg-opacity-80 z-50">
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+       className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[90%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between  backdrop-blur-xl bg-opacity-80 z-50">
         <div className="container mx-auto flex items-center justify-between w-full p-4">
           {/* Logo */}
-          <Link href="/" className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
+          <Link href={`/${id}`} className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
             {Name}
           </Link>
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center justify-between space-x-4">
             <NavLink href={`/${id}`} label="Home"/>
-            <NavLink href="/about" label="About" />
-            <NavLink href="/services" label="Services" />
-            <NavLink href="/projects" label="My Projects" />
-            <NavLink href="/contact" label="Contact" />
-            <NavItem href="/auth/signup" icon={<User />}  theme={theme} />
+            <NavLink href={`/about/${id}`} label="About" />
+            <NavLink href={`/services/${id}`} label="Services" />
+            <NavLink href={`/projects/${id}`} label="My Projects" />
+            <NavLink href={`/contact/${id}`} label="Contact" />
+            <NavItem href={`/auth/signup/${id}`} icon={<User />}  theme={theme} />
             <NavItem href="/auth/generate-passkey" icon={<Key />}  theme={theme} />
             <ThemeToggle />
           </div>

@@ -1,4 +1,7 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 import Link from "next/link";
 
 interface FooterProps {
@@ -12,7 +15,11 @@ export default function SimpleFooter({
     SecondPara,
 }: FooterProps) {
   return (
-    <section className="flex  flex-col items-center text-center">
+    <motion.div
+    initial={{ opacity: 0, y: 50 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 1 }}
+     className="flex  flex-col items-center text-center">
       {/* Hero Text */}
       <div className="mt-6 max-w-full overflow-x-auto">
         <div className="mt-6">
@@ -35,6 +42,8 @@ export default function SimpleFooter({
           </Button>
         </div>
       </div>
-    </section>
+    </motion.div>
   );
 }
+
+
