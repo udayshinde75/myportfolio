@@ -16,7 +16,6 @@ interface AuthResponse {
   authenticated: boolean;
   user?: {
     userId: string;
-    [key: string]: any;
   };
   error?: string;
 }
