@@ -1,7 +1,6 @@
 "use client";
 import Profile from "@/components/custom/herosection/Profile";
 import ProfileActions from "@/components/custom/herosection/ProfileActions";
-import Navbar from "@/components/custom/navbar/Navbar";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
   if (user.name) {
     return (
         <>
-            <Navbar Name={user.name} id={user.id}/>
             <section className="w-full h-full flex-center flex-col">
             <Profile Name={user.name} />
             <ProfileActions ReadMore={true} />

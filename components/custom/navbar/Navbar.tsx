@@ -13,10 +13,7 @@ interface ProfileProps {
   id: string;
 }
 
-export default function Navbar({
-  Name,
-  id,
-}: ProfileProps) {
+export default function Navbar() {
   const [theme, setTheme] = useState("light");
   console.log(theme)
   useEffect(() => {
@@ -37,17 +34,17 @@ export default function Navbar({
        className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[90%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between  backdrop-blur-xl bg-opacity-80 z-50">
         <div className="container mx-auto flex items-center justify-between w-full p-4">
           {/* Logo */}
-          <Link href={`/${id}`} className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
-            {Name}
+          <Link href={`/`} className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
+            FluidDev
           </Link>
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center justify-between space-x-4">
-            <NavLink href={`/${id}`} label="Home"/>
-            <NavLink href={`/about/${id}`} label="About" />
-            <NavLink href={`/services/${id}`} label="Services" />
-            <NavLink href={`/projects/${id}`} label="My Projects" />
-            <NavLink href={`/contact/${id}`} label="Contact" />
-            <NavItem href={`/auth/signup/${id}`} icon={<User />} />
+            <NavLink href={`/`} label="Home"/>
+            <NavLink href={`/about`} label="About" />
+            <NavLink href={`/services`} label="Services" />
+            <NavLink href={`/projects`} label="My Projects" />
+            <NavLink href={`/contact`} label="Contact" />
+            <NavItem href={`/auth/signin`} icon={<User />} />
             <NavItem href="/auth/generate-passkey" icon={<Key />} />
             <ThemeToggle />
           </div>
