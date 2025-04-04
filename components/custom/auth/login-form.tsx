@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/custom/auth/form-error";
 import { FormSuccess } from "@/components/custom/auth/form-success";
 import { motion } from "framer-motion";
+import { LucideHome } from "lucide-react";
 
 export const login = async (data: { email: string; password: string}) => {
     try {
@@ -55,7 +56,7 @@ export const LoginForm = () => {
                     } else {
                         setSuccess("Login successful! Redirecting to your dashboard...");
                         setTimeout(() => {
-                            window.location.href = `/${response.userID}`; // Redirect after login
+                            window.location.href = `/dashboard`; // Redirect after login
                         }, 1500);
                     }
                 })
@@ -71,8 +72,8 @@ export const LoginForm = () => {
         >
         <CardWrapper
             headerLabel="Log in to manage your portfolio"
-            backButtonLabel="Don't have an account?"
-            backButtonHref="/auth/signup"
+            icon={<LucideHome />} 
+            backButtonHref="/"
         >
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
