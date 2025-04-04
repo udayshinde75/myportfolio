@@ -37,7 +37,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar Name={user.name} id={user.id} />
+      <Navbar/>
       <section className="w-full md:h-[90vh] h-full lg:mt-0 mt-10 flex-center gap-y-6 flex-col lg:flex-row">
         <SimpleFooter FirstPara={firstPara} SecondPara={secondPara} />
         <RegisterForm />

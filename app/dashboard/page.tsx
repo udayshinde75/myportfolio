@@ -86,7 +86,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <Navbar Name={user.name} id={user._id} />
+      <Navbar />
       <div className="p-6 max-w-3xl mt-32 mx-auto">
         <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
         <p className="text-muted-foreground">Email: {user.email}</p>

@@ -45,7 +45,7 @@ export default function Navbar() {
             <NavLink href={`/projects`} label="My Projects" />
             <NavLink href={`/contact`} label="Contact" />
             <NavItem href={`/auth/signin`} icon={<User />} />
-            <NavItem href="/auth/generate-passkey" icon={<Key />} />
+            {/*<NavItem href="/auth/generate-passkey" icon={<Key />} />*/}
             <ThemeToggle />
           </div>
           <div className="space-x-6 md:hidden flex items-center justify-between">

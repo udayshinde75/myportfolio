@@ -4,12 +4,12 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 interface BackButtonProps {
-    label: string;
+    icon: React.ReactNode;
     href: string;
 }   
 
 export const BackButton = ({
-    label,
+    icon,
     href
 } : BackButtonProps) => {
     return (
@@ -20,7 +20,7 @@ export const BackButton = ({
         >
             <Link href={href
             }>
-                {label}
+                {icon}
             </Link>
         </Button>
     )
