@@ -7,6 +7,9 @@ export interface IUser extends Document {
     email: string;
     password: string;
     createdAt: Date;
+    profilePicture?: string;
+    resumeLink?: string;
+    bio?: string;
 }
 
 // Create the schema
@@ -31,6 +34,18 @@ const UserSchema = new Schema<IUser>({
         type: Date,
         default: Date.now,
     },
+    profilePicture: {
+        type: String,
+        default: ""
+    },
+    resumeLink: {
+        type: String,
+        default: ""
+    },
+    bio : {
+        type : String,
+        default : ""
+    }
 });
 
 // Export the model only if it hasn’t been defined before
