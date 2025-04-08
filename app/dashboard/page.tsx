@@ -88,26 +88,21 @@ export default function Dashboard() {
   const UpdateProfileText = "Update your profile";
   return (
     <div className="w-full max-w-2xl mx-auto px-4 py-8 mt-10 space-y-8">
-    <div className="text-center space-y-2">
-      <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
-      <p className="text-muted-foreground text-sm sm:text-base">
-        Email: {user.email}
-      </p>
-    </div>
-    <div className="w-full pt-6 border-t border-gray-400 text-center">
-      <Button
-        variant="outline"
-        onClick={handleLogout}
-      >
-        Logout
-      </Button>
-    </div>
+      <div className="text-center space-y-2">
+        <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">
+          Email: {user.email}
+        </p>
+      </div>
+      <div className="w-full pt-6 border-t border-gray-400 text-center">
+        <Button variant="outline" onClick={handleLogout}>
+          Logout
+        </Button>
+      </div>
 
-    <div className="w-full">
-      <UpdateProfileForm />
+      <div className="w-full">
+        <UpdateProfileForm />
+      </div>
     </div>
-
-    
-  </div>
   );
 }

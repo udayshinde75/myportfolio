@@ -4,28 +4,41 @@ import ProfileActions from "@/components/custom/herosection/ProfileActions";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState<{ name: string, id: string }>({ name: "", id: "" });
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("/api/auth/getUserByID"); // No userID
-        if (!res.ok) throw new Error("User not found");
-        const data = await res.json();
-        setUser(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    profilePicture: "",
+    resumeLink: "",
+    bio: "",
+  })
+      useEffect(() => {
+          const fetchUser = async () => {
+              try {
+                  const res = await fetch("/api/home/profile");
+                  const data = await res.json();
+                  if (res.ok) {
+                    setUser({
+                      name: data.name || "",
+                      email: data.email || "",
+                      profilePicture: data.profilePicture || "",
+                      resumeLink: data.resumeLink || "",
+                      bio: data.bio || "",
+                    })
+                  } else {
+                      console.log((data.error) || "Could not fetch user data!");
+                  }
+              } catch(err) {
+                  console.log("Error in loading profile on home page : "+ err)
+              }
+          };
+          fetchUser();
+      }, []);
 
   if (user.name) {
     return (
             <section className="w-full h-full flex-center flex-col">
-            <Profile Name={user.name} />
-            <ProfileActions ReadMore={true} />
+            <Profile user={user}/>
+            <ProfileActions ReadMore={true} user={user}/>
             </section>
       );
   } else {
