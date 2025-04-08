@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import Navbar from "@/components/custom/navbar/Navbar";
+import { UpdateProfileForm } from "@/components/custom/dashboard/form-profile";
+import SimpleFooter from "@/components/custom/footer/SimpleFooter";
 
 interface User {
   _id: string;
@@ -25,13 +26,13 @@ export default function Dashboard() {
     const fetchUserData = async () => {
       try {
         const response = await fetch("/api/auth/profileinfo");
-        
+
         if (!response.ok) {
           throw new Error("Failed to fetch user data");
         }
 
         const data = await response.json();
-        
+
         if (data.error) {
           setError(data.error);
           router.push("/auth/signin");
@@ -53,8 +54,8 @@ export default function Dashboard() {
   // Logout function
   const handleLogout = async () => {
     try {
-      const response = await fetch("/api/auth/signout", { 
-        method: "POST" 
+      const response = await fetch("/api/auth/signout", {
+        method: "POST",
       });
 
       if (!response.ok) {
@@ -84,46 +85,29 @@ export default function Dashboard() {
     );
   }
 
+  const UpdateProfileText = "Update your profile";
   return (
-    <>
-      <Navbar />
-      <div className="p-6 max-w-3xl mt-32 mx-auto">
-        <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
-        <p className="text-muted-foreground">Email: {user.email}</p>
+    <div className="w-full max-w-2xl mx-auto px-4 py-8 mt-10 space-y-8">
+    <div className="text-center space-y-2">
+      <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
+      <p className="text-muted-foreground text-sm sm:text-base">
+        Email: {user.email}
+      </p>
+    </div>
+    <div className="w-full pt-6 border-t border-gray-400 text-center">
+      <Button
+        variant="outline"
+        onClick={handleLogout}
+      >
+        Logout
+      </Button>
+    </div>
 
-        <div className="mt-8">
-          <h2 className="text-xl font-semibold mb-4">Your Projects</h2>
-          {user.projects?.length ? (
-            <ul className="space-y-2">
-              {user.projects.map((project) => (
-                <li 
-                  key={project._id} 
-                  className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100"
-                >
-                  {project.name}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="p-4 bg-gray-50 rounded-lg text-center">
-              <p className="text-gray-500">No projects yet</p>
-              <Button variant="outline" className="mt-2">
-                Create New Project
-              </Button>
-            </div>
-          )}
-        </div>
+    <div className="w-full">
+      <UpdateProfileForm />
+    </div>
 
-        <div className="mt-10 border-t pt-6">
-          <Button 
-            variant="destructive"
-            onClick={handleLogout}
-            className="w-full sm:w-auto"
-          >
-            Logout
-          </Button>
-        </div>
-      </div>
-    </>
+    
+  </div>
   );
 }

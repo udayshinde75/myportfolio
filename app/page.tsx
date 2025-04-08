@@ -23,16 +23,14 @@ export default function Home() {
 
   if (user.name) {
     return (
-        <>
             <section className="w-full h-full flex-center flex-col">
             <Profile Name={user.name} />
             <ProfileActions ReadMore={true} />
             </section>
-        </>
       );
   } else {
     return (
-        <section className="w-full h-[100vh] flex-center flex-col">
+        <section className="w-full min-h-screen flex-center flex-col">
           <p>Loading...</p>
         </section>
       );

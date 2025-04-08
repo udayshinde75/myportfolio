@@ -8,11 +8,6 @@ import {Home, Info, Briefcase, Mail, FolderOpen, User, Key } from "lucide-react"
 import ThemeToggle from "@/components/custom/navbar/ThemeToggle";
 import { motion } from "framer-motion";
 
-interface ProfileProps {
-  Name: string;
-  id: string;
-}
-
 export default function Navbar() {
   const [theme, setTheme] = useState("light");
   console.log(theme)
@@ -49,8 +44,8 @@ export default function Navbar() {
             <ThemeToggle />
           </div>
           <div className="space-x-6 md:hidden flex items-center justify-between">
-            <NavItem href="/auth/signup" icon={<User />} />
-            <NavItem href="/auth/generate-passkey" icon={<Key />} />
+            <NavItem href="/auth/signin" icon={<User />} />
+            {/*<NavItem href="/auth/generate-passkey" icon={<Key />} />*/}
             <ThemeToggle />
           </div>
         </div>
