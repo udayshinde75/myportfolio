@@ -7,10 +7,14 @@ import { ArrowRight } from "lucide-react";
 
 interface ActionProps{
     ReadMore: boolean;
+    user: {
+      resumeLink: string,
+    }
 }
 
 export default function ProfileActions({
-    ReadMore
+    ReadMore,
+    user
 }: ActionProps) {
   return (
     <motion.div
@@ -28,7 +32,7 @@ export default function ProfileActions({
         <Link href="/#contact">Hire Me</Link>
       </Button>
       <Button asChild variant="outline" className="px-6 py-3 mx-auto">
-        <Link href="/resume.pdf" target="_blank">
+        <Link href={user.resumeLink} target="_blank">
           Download CV
         </Link>
       </Button>

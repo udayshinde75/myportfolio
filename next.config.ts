@@ -6,7 +6,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
+        hostname: 'drive.google.com',
         // You can specify a pathname pattern if needed
         // pathname: '/**',  // Optional: Allows all paths
       },
