@@ -1,6 +1,7 @@
 "use client";
 import Profile from "@/components/custom/herosection/Profile";
 import ProfileActions from "@/components/custom/herosection/ProfileActions";
+import { Line } from "@/components/custom/navbar/line";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -33,12 +34,14 @@ export default function Home() {
           };
           fetchUser();
       }, []);
-
   if (user.name) {
     return (
             <section className="w-full h-full flex-center flex-col">
-            <Profile user={user}/>
+            <Profile user={user} showProfilePicture={true} textAlignment="text-center px-14"/>
+            
             <ProfileActions ReadMore={true} user={user}/>
+            <Line />
+           
             </section>
       );
   } else {
