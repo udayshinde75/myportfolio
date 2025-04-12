@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { UpdateProfileForm } from "@/components/custom/dashboard/form-profile";
-import SimpleFooter from "@/components/custom/footer/SimpleFooter";
+import { Line } from "@/components/custom/navbar/line";
+import JobList from "@/components/custom/dashboard/job-list";
 
 interface User {
   _id: string;
@@ -87,22 +88,25 @@ export default function Dashboard() {
 
   const UpdateProfileText = "Update your profile";
   return (
-    <div className="w-full max-w-2xl mx-auto px-4 py-8 mt-10 space-y-8">
+    <div className="container-width flex-center flex-col px-4 py-8 mt-10 space-y-8">
       <div className="text-center space-y-2">
         <h1 className="text-2xl font-bold">Welcome, {user.name} 👋</h1>
         <p className="text-muted-foreground text-sm sm:text-base">
           Email: {user.email}
         </p>
       </div>
-      <div className="w-full pt-6 border-t border-gray-400 text-center">
-        <Button variant="outline" onClick={handleLogout}>
+      <Line/>
+      
+        <Button variant="outline" onClick={handleLogout} className="mx-auto">
           Logout
         </Button>
-      </div>
 
-      <div className="w-full">
+      <div className="container-width">
         <UpdateProfileForm />
       </div>
+      <Line/>
+      <JobList />
+      <Line/>
     </div>
   );
 }

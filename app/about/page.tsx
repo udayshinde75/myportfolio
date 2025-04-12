@@ -1,7 +1,10 @@
 "use client"
 
+import Career from "@/components/custom/about/Career";
+import Education from "@/components/custom/about/Education";
 import Profile from "@/components/custom/herosection/Profile";
 import ProfileActions from "@/components/custom/herosection/ProfileActions";
+import { Line } from "@/components/custom/navbar/line";
 import { useEffect, useState } from "react";
 export default function AboutPage() {
   const [user, setUser] = useState({
@@ -36,7 +39,11 @@ export default function AboutPage() {
   if (user.name) {
       return (
         <section className="w-full h-full flex-center flex-col">
-        <Profile user={user}/>
+        <Profile user={user} textAlignment="text-justify" showProfilePicture={false}/>
+        <Line />
+        <Career />
+        <Line />
+        <Education />
         <ProfileActions ReadMore={false} user={user}/>
       </section>
         );

@@ -1,16 +1,17 @@
 import { connectToDB } from "@/utils/database";
-import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { User } from "@/models/user";
+import { getToken } from "@/utils/getToken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET() {
     try {
         await connectToDB();
-        const cookieStore = await cookies();
-        const token = cookieStore.get("token")?.value;
+        //const cookieStore = await cookies();
+        //const token = cookieStore.get("token")?.value;
+        const token = await getToken();
         if (!token) {
             return NextResponse.json({ error: "Unauthorized"}, {status: 401});
         }

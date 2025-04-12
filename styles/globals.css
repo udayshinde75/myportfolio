@@ -246,3 +246,6 @@ body {
   }
 }
 
+.container-width {
+  @apply w-[85%] max-w-[1000px]
+}

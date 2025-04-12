@@ -1,5 +1,6 @@
 import Navbar from "@/components/custom/navbar/Navbar";
 import "@/styles/globals.css";
+import { Toaster } from 'sonner';
 
 import { ReactNode } from "react";
 
@@ -15,6 +16,7 @@ export default function RootLayout({
         >
           <Navbar/>
           {children}
+          <Toaster position="top-center" richColors />
         </body>
     </html>
   );
