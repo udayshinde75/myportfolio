@@ -67,7 +67,6 @@ interface IEducation {
     scoreType:string;
 }
 
-const allowedScoreTypes = ["CGPA", "Percentage", "Grade"] as const;
 
 type EducationFormValues = z.infer<typeof EducationSchema>;
 
@@ -96,9 +95,9 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
             : "",
           proof: initialData?.proof || "",
           score: initialData?.score || "",
-          scoreType: allowedScoreTypes.includes(initialData?.scoreType as any)
-          ? (initialData?.scoreType as "CGPA" | "Percentage" | "Grade")
-          : "CGPA",
+          scoreType: ["CGPA", "Percentage", "Grade"].includes(initialData?.scoreType as string)
+            ? (initialData?.scoreType as "CGPA" | "Percentage" | "Grade")
+            : "CGPA",
         },
     });
 

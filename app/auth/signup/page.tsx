@@ -6,11 +6,11 @@ import Navbar from "@/components/custom/navbar/Navbar";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    id: "",
-  });
+  // const [user, setUser] = useState({
+  //   name: "",
+  //   email: "",
+  //   id: "",
+  // });
 
   // Set the default userID from the environment variable if userID is empty
   //const userID = process.env.NEXT_PUBLIC_OWNER || "";
@@ -21,7 +21,7 @@ export default function Home() {
         const res = await fetch("/api/auth/getUserByID"); // No userID
         if (!res.ok) throw new Error("User not found");
         const data = await res.json();
-        setUser(data);
+        //setUser(data);
       } catch (error) {
         console.error(error);
       }
