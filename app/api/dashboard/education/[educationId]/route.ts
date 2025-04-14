@@ -24,7 +24,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { educationId: string } }
+    context: { params: { educationId: string } }
 ) {
     try {
         await connectToDB();
@@ -35,6 +35,7 @@ export async function GET(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
+        const { params } = context;
         const { educationId } = params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
@@ -75,7 +76,7 @@ export async function GET(
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { educationId: string } }
+    context: { params: { educationId: string } }
 ) {
     try {
         await connectToDB();
@@ -86,6 +87,7 @@ export async function PATCH(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
+        const { params } = context;
         const { educationId } = params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
@@ -123,7 +125,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { educationId: string } }
+    context: { params: { educationId: string } }
 ) {
     try {
         await connectToDB();
@@ -134,6 +136,7 @@ export async function DELETE(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
+        const { params } = context;
         const { educationId } = params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
