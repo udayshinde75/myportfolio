@@ -6,7 +6,7 @@ import { getToken } from "@/utils/getToken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
-export async function GET(req: Request) {
+export async function GET(_req: Request) {
     try {
         await connectToDB();
         //const cookieStore = await cookies();

@@ -89,9 +89,10 @@ export default function JobList() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
+              key={job._id}
             >
               <Card
-                key={job._id}
+                
                 className="shadow-xl md:border border-none mt-10  border-gray-500 rounded-3xl px-3   backdrop-blur-xl bg-opacity-80 "
               >
                 <CardContent className="p-6">
