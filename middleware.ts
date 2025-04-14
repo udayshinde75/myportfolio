@@ -1,29 +1,26 @@
 import { NextResponse } from "next/server";
-import { cookies } from "next/headers";
+import type { NextRequest } from "next/server";
 import { jwtVerify } from "jose";
 
-const JWT_SECRET = process.env.JWT_SECRET || "your-secure-secret-key";
+const JWT_SECRET = process.env.JWT_SECRET || "";
 
-export async function middleware(req: Request) {
-    const cookieStore = await cookies(); // ✅ Await the cookies()
-    const token = cookieStore.get("token")?.value; // ✅ Extract token
+export async function middleware(req: NextRequest) {
+  const token = req.cookies.get("token")?.value;
 
-    console.log(token)
+  if (!token) {
+    return NextResponse.redirect(new URL("/auth/signin", req.url));
+  }
 
-    if (!token) {
-        return NextResponse.redirect(new URL("/auth/signin", req.url));
-    }
-
-    try {
-        await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
-        return NextResponse.next();
-    } catch (error) {
-        console.log("middleware"+error)
-        return NextResponse.redirect(new URL("/auth/signin", req.url));
-    }
+  try {
+    await jwtVerify(token, new TextEncoder().encode(JWT_SECRET));
+    return NextResponse.next();
+  } catch (error) {
+    console.error("JWT verification failed:", error);
+    return NextResponse.redirect(new URL("/auth/signin", req.url));
+  }
 }
 
-// Apply middleware to protect specific routes
+// Apply middleware to protect all dashboard routes
 export const config = {
-    matcher: ["/dashboard"],
+  matcher: ["/dashboard/:path*"],
 };

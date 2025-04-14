@@ -2,8 +2,8 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { boolean, z } from "zod";
-import { useEffect, useState, useTransition } from "react";
+import { z } from "zod";
+import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Home } from "lucide-react";
@@ -28,10 +28,11 @@ const JobSchema = z.object({
   title: z.string().min(1, "Job Title is required!"),
   startDate: z.string().min(1, "Start Date is required!"),
   endDate: z.string().min(1, "End Date is required!"),
-  companyName: z.string().min(1, "Company Name is required"),
+  companyName: z.string().min(1, "Company Name is required!"),
   companyLink: z.string().optional(),
-  description: z.string().min(100, "Describle your Job in 100 words"),
-  skills: z.string().min(1, "Skills are required (comma-separated)"),
+  location: z.string().min(1, "Job location is required!"),
+  description: z.string().min(100, "Describle your Job in 100 words."),
+  skills: z.string().min(1, "Skills are required (comma-separated:MongoDB,React.js)"),
 });
 
 type JobFormValues = z.infer<typeof JobSchema>;
@@ -43,6 +44,7 @@ interface JobType {
   endDate: string;
   companyName: string;
   companyLink?: string;
+  location: string;
   description: string;
   skills: string[];
 }
@@ -64,6 +66,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
       endDate: initialData?.endDate || "",
       companyName: initialData?.companyName || "",
       companyLink: initialData?.companyLink || "",
+      location: initialData?.location || "",
       description: initialData?.description || "",
       skills: (initialData?.skills && initialData.skills.length > 0) 
         ? initialData.skills.join(", ") 
@@ -114,6 +117,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
+      className="w-full"
     >
       <CardWrapper
         headerLabel={isEditMode ? "Edit Job" : "Add New Job"}
@@ -176,24 +180,42 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                 )}
               />
             </div>
-
-            <FormField
-              control={form.control}
-              name="companyName"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Company Name</FormLabel>
-                  <FormControl>
-                    <Input
-                      placeholder="e.g. Google, Inc."
-                      {...field}
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="companyName"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Company Name</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="e.g. Google, Inc."
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="location"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Location</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="pune, India"
+                        {...field}
+                        disabled={isPending}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="companyLink"

@@ -8,6 +8,7 @@ export interface IJob extends Document {
     endDate: string;
     companyName: string;
     companyLink?: string;
+    location: string;
     description?: string;
     skills?: string[];
     user: mongoose.Types.ObjectId;
@@ -19,7 +20,8 @@ const JobSchema = new Schema<IJob>({
   endDate: { type: String, default: "Present" },
   companyName: { type: String, required: true },
   companyLink: { type: String },
-  description: { type: String },
+  location: {type: String},
+  description: { type: String, default: "" },
   skills: { type: [String], default: [] }, // e.g., ["React.js", "MongoDB"]
 
   // Reference to user

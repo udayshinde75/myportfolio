@@ -1,10 +1,6 @@
 import { connectToDB } from "@/utils/database";
-import { getToken } from "@/utils/getToken";
 import { NextResponse } from "next/server";
-import jwt from "jsonwebtoken";
 import { Job } from "@/models/job";
-
-const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(req: Request) {
     try {

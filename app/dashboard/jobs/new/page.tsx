@@ -15,6 +15,7 @@ export default function Job() {
     endDate: "",
     companyName: "",
     companyLink: "",
+    location: "",
     description: "",
     skills: [],
   })
@@ -42,9 +43,11 @@ export default function Job() {
             endDate: data.endDate,
             companyName: data.companyName,
             companyLink: data.companyLink,
+            location: data.location||"",
             description:data.description,
             skills:data.skills,
            })
+          console.log("job:"+job)
         } else {
           setLoading(false)
           return
