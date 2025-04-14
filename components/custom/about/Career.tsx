@@ -35,7 +35,6 @@ export default function Career() {
         }
         })
         .catch(() => toast.error("Failed to fetch jobs"))
-        .finally(() => setJobs([]));
     }, []);
     return (
         <motion.div

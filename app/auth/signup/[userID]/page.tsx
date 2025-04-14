@@ -6,12 +6,6 @@ import Navbar from "@/components/custom/navbar/Navbar";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-interface User {
-  name: string;
-  email: string;
-  id: string;
-}
-
 interface AuthResponse {
   authenticated: boolean;
   user?: {
@@ -49,7 +43,7 @@ export default function SignUpPage({ params }: { params: Promise<{ userID?: stri
         // Then fetch user data
         const res = await fetch(`/api/auth/getUserByID?userID=${id}`);
         if (!res.ok) throw new Error("User not found");
-        const data = await res.json()
+        //const data = await res.json()
       } catch (error) {
         console.error(error);
       }
