@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import NavLink from "@/components/custom/navbar/NavLink"
 import NavItem from "./NavItem";
-import {Home, Info, Briefcase, Mail, FolderOpen, User, Key } from "lucide-react";
+import {Home, Info, Briefcase, Mail, FolderOpen, User } from "lucide-react";
 import ThemeToggle from "@/components/custom/navbar/ThemeToggle";
 import { motion } from "framer-motion";
 

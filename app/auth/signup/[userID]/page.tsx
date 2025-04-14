@@ -23,7 +23,6 @@ interface AuthResponse {
 export default function SignUpPage({ params }: { params: Promise<{ userID?: string }> }) {
   const router = useRouter();
   const [userID, setUserID] = useState<string>("");
-  const [user, setUser] = useState<User | null>(null);
 
   // Extract userID from params
   useEffect(() => {
@@ -50,11 +49,9 @@ export default function SignUpPage({ params }: { params: Promise<{ userID?: stri
         // Then fetch user data
         const res = await fetch(`/api/auth/getUserByID?userID=${id}`);
         if (!res.ok) throw new Error("User not found");
-        const data = await res.json();
-        setUser(data);
+        const data = await res.json()
       } catch (error) {
         console.error(error);
-        setUser(null);
       }
     }
   

@@ -23,7 +23,6 @@ const EducationSchema = z.object({
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
-    req: Request,
     { params } : {params : {educationId: string}}
 ) {
     try {
@@ -128,7 +127,6 @@ export async function PATCH (
 }
 
 export async function DELETE (
-    req: Request,
     { params }: { params: { educationId : string}}
 ) {
     try {

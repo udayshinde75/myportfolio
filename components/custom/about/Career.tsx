@@ -23,7 +23,6 @@ interface JobType {
 
 export default function Career() {
     const [jobs, setJobs] = useState<JobType[]>([]);
-    const [loading, setLoading] = useState(true);
     useEffect(() => {
     fetch("/api/about/career")
         .then((res) => res.json())
@@ -36,7 +35,7 @@ export default function Career() {
         }
         })
         .catch(() => toast.error("Failed to fetch jobs"))
-        .finally(() => setLoading(false));
+        .finally(() => setJobs([]));
     }, []);
     return (
         <motion.div
@@ -53,8 +52,9 @@ export default function Career() {
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
+              key={job._id}
             >
-                <div key={job._id} className="mt-2">
+                <div  className="mt-2">
                 <div className="flex justify-between items-center ">
                     <h2 className="text-xl font-semibold text-left">{job.title} <br/> {job.location}</h2>
                     <h2 className="text-xs font-semibold text-right">{job.startDate} - {job.endDate}</h2>

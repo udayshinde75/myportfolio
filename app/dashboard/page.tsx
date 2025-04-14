@@ -87,7 +87,7 @@ export default function Dashboard() {
     );
   }
 
-  const UpdateProfileText = "Update your profile";
+  //const UpdateProfileText = "Update your profile";
   return (
     <div className="container-width flex-center flex-col px-4 py-8 mt-10 space-y-8">
       <div className="text-center space-y-2">
