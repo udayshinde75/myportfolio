@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { verifyToken } from "@/utils/auth";
 import { cookies } from "next/headers";
 
-export const GET = async (req: Request) => {
+export const GET = async (_req: Request) => {
   try {
     const cookieStore = await cookies(); 
     const token = cookieStore.get("token")?.value;

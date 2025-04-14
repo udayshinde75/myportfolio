@@ -20,7 +20,7 @@ export default function Home() {
       try {
         const res = await fetch("/api/auth/getUserByID"); // No userID
         if (!res.ok) throw new Error("User not found");
-        const data = await res.json();
+        //const data = await res.json();
         //setUser(data);
       } catch (error) {
         console.error(error);
