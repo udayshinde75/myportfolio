@@ -24,7 +24,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
     _req: Request,
-    { params } : {params : {educationId: string}}
+    context: { params: { educationId: string } }
 ) {
     try {
         await connectToDB();
@@ -35,7 +35,7 @@ export async function GET(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        const { educationId } = await params;
+        const { educationId } = await context.params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
             const education = await Education.findOne({
