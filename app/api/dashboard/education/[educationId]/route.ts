@@ -1,6 +1,6 @@
 import { connectToDB } from "@/utils/database";
 import { getToken } from "@/utils/getToken";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { Education } from "@/models/education";
 import { z } from "zod";
@@ -23,7 +23,7 @@ const EducationSchema = z.object({
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
-    _req: Request,
+    _req: NextRequest,
     context: { params: { educationId: string } }
 ) {
     try {
