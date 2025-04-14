@@ -3,7 +3,7 @@
 import RegisterForm from "@/components/custom/auth/register-form";
 import SimpleFooter from "@/components/custom/footer/SimpleFooter";
 import Navbar from "@/components/custom/navbar/Navbar";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   // const [user, setUser] = useState({

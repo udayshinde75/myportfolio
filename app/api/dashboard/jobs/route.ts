@@ -6,7 +6,7 @@ import { Job } from "@/models/job";
 
 const JWT_SECRET = process.env.JWT_SECRET || "";
 
-export async function GET() {
+export async function GET(req: Request) {
     try {
         await connectToDB();
         const Token = await getToken();

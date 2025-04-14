@@ -2,7 +2,7 @@ import { connectToDB } from "@/utils/database";
 import { NextResponse } from "next/server";
 import { Job } from "@/models/job";
 
-export async function GET() {
+export async function GET(req: Request) {
     try {
         await connectToDB();
         const jobs = await Job.find({ user: process.env.NEXT_PUBLIC_OWNER }).sort({ createdAt: -1 });
