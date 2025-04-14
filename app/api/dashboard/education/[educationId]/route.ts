@@ -24,7 +24,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
     request: NextRequest,
-    context: { params: { educationId: string } }
+    { params }: { params: Promise<{ educationId: string }> }
 ) {
     try {
         await connectToDB();
@@ -35,8 +35,7 @@ export async function GET(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        const { params } = context;
-        const { educationId } = params;
+        const { educationId } = await params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
             const education = await Education.findOne({
@@ -76,7 +75,7 @@ export async function GET(
 
 export async function PATCH(
     request: NextRequest,
-    context: { params: { educationId: string } }
+    { params }: { params: Promise<{ educationId: string }> }
 ) {
     try {
         await connectToDB();
@@ -87,8 +86,7 @@ export async function PATCH(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        const { params } = context;
-        const { educationId } = params;
+        const { educationId } = await params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
             const body = await request.json();
@@ -125,7 +123,7 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    context: { params: { educationId: string } }
+    { params }: { params: Promise<{ educationId: string }> }
 ) {
     try {
         await connectToDB();
@@ -136,8 +134,7 @@ export async function DELETE(
         }
 
         const decoded = jwt.verify(token, JWT_SECRET);
-        const { params } = context;
-        const { educationId } = params;
+        const { educationId } = await params;
 
         if (typeof decoded !== "string" && "userId" in decoded) {
             const education = await Education.findOne({
