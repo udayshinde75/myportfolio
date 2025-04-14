@@ -114,7 +114,7 @@ export default function EducationList() {
                       <div className="space-x-2 flex-center mt-2">
                         <Button
                           variant="outline"
-                          onClick={() => router.push(`/dashboard/education?id=${data._id}`)}
+                          onClick={() => router.push(`/dashboard/education?id=${data._id.toString()}`)}
                         >
                           <Edit />
                         </Button>
