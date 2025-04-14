@@ -20,7 +20,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "";
 
 export async function GET(
     req: Request,
-    { params } : {params : {jobId: string}}
+    { params }: { params: Promise<{ jobId: string }> }
 ) {
     try {
         await connectToDB();
@@ -69,7 +69,7 @@ export async function GET(
 
 export async function PATCH (
     req: Request,
-    { params } : { params: { jobId:string } }
+    { params }: { params: Promise<{ jobId: string }> }
 ) {
     try {
         await connectToDB();
@@ -114,7 +114,7 @@ export async function PATCH (
 
 export async function DELETE (
     req: Request,
-    { params }: { params: { jobId : string}}
+    { params }: { params: Promise<{ jobId: string }> }
 ) {
     try {
         await connectToDB();
