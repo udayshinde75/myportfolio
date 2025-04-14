@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { UpdateProfileForm } from "@/components/custom/dashboard/form-profile";
 import { Line } from "@/components/custom/navbar/line";
 import JobList from "@/components/custom/dashboard/job-list";
+import EducationList from "@/components/custom/dashboard/education-list";
 
 interface User {
   _id: string;
@@ -106,6 +107,8 @@ export default function Dashboard() {
       </div>
       <Line/>
       <JobList />
+      <Line/>
+      <EducationList />
       <Line/>
     </div>
   );

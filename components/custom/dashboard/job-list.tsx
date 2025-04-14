@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Delete } from "lucide-react";
 import { Description } from "./description";
 import { motion } from "framer-motion";
@@ -16,6 +15,7 @@ interface JobType {
   endDate: string;
   companyName: string;
   companyLink?: string;
+  location:string;
   description: string;
   skills: string[];
 }
@@ -54,7 +54,9 @@ export default function JobList() {
           } else {
             toast.error(data.error || "Failed to delete job");
           }
-        });
+        })
+        .catch(() => toast.error("Failed to delete data"))
+        
     });
   };
 
@@ -108,6 +110,9 @@ export default function JobList() {
                         ) : (
                           job.companyName
                         )}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {job.location}
                       </p>
                       <p className="text-sm text-muted-foreground">
                         {job.startDate} – {job.endDate}
