@@ -95,12 +95,16 @@ export default function Dashboard() {
         <p className="text-muted-foreground text-sm sm:text-base">
           Email: {user.email}
         </p>
+        <Button onClick={handleLogout} className="mx-auto">
+          Messages
+        </Button>
       </div>
       <Line/>
       
         <Button variant="outline" onClick={handleLogout} className="mx-auto">
           Logout
         </Button>
+        
 
       <div className="container-width">
         <UpdateProfileForm />

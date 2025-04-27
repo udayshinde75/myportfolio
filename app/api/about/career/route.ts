@@ -6,10 +6,10 @@ export async function GET(_req: Request) {
     try {
         await connectToDB();
         const jobs = await Job.find({ user: process.env.NEXT_PUBLIC_OWNER }).sort({ createdAt: -1 });
-        console.log(jobs)
+        //console.log(jobs)
         return NextResponse.json(jobs);
     } catch (error) {
-        console.log("api/dashboard/jobs :" + error)
+        console.log("api/about/career :" + error)
         return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
     }
 }

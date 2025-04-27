@@ -37,7 +37,7 @@ export default function Home() {
   if (user.name) {
     return (
             <section className="w-full h-full flex-center flex-col">
-            <Profile user={user} showProfilePicture={true} textAlignment="text-center px-14"/>
+            <Profile user={user} showProfilePicture={true} textAlignment="text-center px-6"/>
             
             <ProfileActions ReadMore={true} user={user}/>
             <Line />

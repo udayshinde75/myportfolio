@@ -4,26 +4,43 @@ import { motion } from "framer-motion";
 function Line() {
   return (
     <motion.div
-      className="h-[2px] bg-gray-400 rounded-full my-6  container-width"
-      initial={{ opacity: 0, scaleX: 0 }}
-      animate={{ opacity: 1, scaleX: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      style={{ originX: 0 }}
+      className="h-[2px] my-6 container-width bg-[length:15px_2px] bg-repeat-x"
+      style={{
+        backgroundImage: "repeating-linear-gradient(to right, gray 0 2px, transparent 10px 20px)",
+        backgroundPosition: "0px 0px",
+      }}
+      animate={{
+        backgroundPosition: ["5px 0px", "20px 0px"],
+      }}
+      transition={{
+        duration: 1,
+        repeat: Infinity,
+        ease: "linear",
+      }}
     />
   );
-};
+}
 
 
 function VerticalLine() {
   return (
     <motion.div
-      className="w-[2px] h-[100px] bg-gray-400 rounded-full ms-16 my-6"
-      initial={{ opacity: 0, scaleY: 0 }}
-      animate={{ opacity: 1, scaleY: 1 }}
-      transition={{ duration: 1, ease: "easeOut" }}
-      style={{ originY: 0 }}
+      className="w-[2px] md:h-[100px] h-[50px] my-6 ms-16 bg-[length:2px_20px] bg-repeat-y"
+      style={{
+        backgroundImage: "repeating-linear-gradient(to bottom, gray 0 2px, transparent 10px 20px)",
+        backgroundPosition: "0px 0px",
+      }}
+      animate={{
+        backgroundPosition: ["0px 0px", "0px -20px"],
+      }}
+      transition={{
+        duration: 1,
+        repeat: Infinity,
+        ease: "linear",
+      }}
     />
   );
 }
+
 
 export { Line, VerticalLine };
