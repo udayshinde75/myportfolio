@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { FormSuccess } from "../auth/form-success";
 import { Button } from "@/components/ui/button";
 import { FormError } from "../auth/form-error";
+import { useRouter } from "next/navigation";
 
 const UpdateSchema = z.object({
     name: z.string().min(1, "Name is required"),
@@ -26,6 +27,7 @@ export const UpdateProfileForm = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [isPending, startTransition] = useTransition();
+    const router = useRouter(); 
 
     const form = useForm<UpdateFormData>({
         resolver: zodResolver(UpdateSchema),
@@ -76,6 +78,10 @@ export const UpdateProfileForm = () => {
             .then((result) => {
                 setError(result.error ?? "");
                 setSuccess(result.success ?? "");
+
+                if (result.success) {
+                    router.push("/auth/signin");
+                }
             })
             .catch(() => setError("Something Went Wrong"));
         })
