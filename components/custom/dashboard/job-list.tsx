@@ -72,8 +72,8 @@ export default function JobList() {
     <motion.div
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="space-y-6"
+      transition={{ duration: 0.5 }}
+      className="space-y-6 m-5"
     >
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Career Data</h2>

@@ -52,7 +52,7 @@ export async function POST (req: Request) {
             await newEducation.save();
 
             return NextResponse.json(
-                { success: "Job created successfully", education: newEducation },
+                { success: "Education created successfully", education: newEducation },
                 { status: 201 }
             );
         }

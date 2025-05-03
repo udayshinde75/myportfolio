@@ -62,8 +62,8 @@ export default function EducationList() {
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="space-y-6"
+          transition={{ duration: 0.5 }}
+          className="space-y-6 m-5"
         >
           <div className="flex justify-between items-center gap-x-5">
             <h2 className="text-xl font-semibold">Education Data</h2>
@@ -78,7 +78,7 @@ export default function EducationList() {
                 <motion.div
                   initial={{ opacity: 0, y: 50 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
+                  transition={{ duration: 0.5 }}
                   key={data._id.toString()}
                 >
                   <Card

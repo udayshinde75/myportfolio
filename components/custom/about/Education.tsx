@@ -1,3 +1,5 @@
+"use client"
+
 import { motion } from "framer-motion";
 import { VerticalLine } from "../navbar/line";
 import { useEffect, useState } from "react";
