@@ -6,6 +6,8 @@ import { UpdateProfileForm } from "@/components/custom/dashboard/form-profile";
 import { Line } from "@/components/custom/navbar/line";
 import JobList from "@/components/custom/dashboard/job-list";
 import EducationList from "@/components/custom/dashboard/education-list";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import ServiceList from "@/components/custom/dashboard/services-list";
 
 interface User {
   _id: string;
@@ -105,14 +107,28 @@ export default function Dashboard() {
           Logout
         </Button>
         
+        <Tabs defaultValue="Account" className="w-full">
+          <TabsList className="w-full">
+            <TabsTrigger value="Account" className="w-full">Account</TabsTrigger>
+            <TabsTrigger value="Career" className="w-full">Career</TabsTrigger>
+            <TabsTrigger value="Education" className="w-full">Education</TabsTrigger>
+            <TabsTrigger value="Services" className="w-full">Services</TabsTrigger>
+          </TabsList>
+          <TabsContent value="Account">
+            <UpdateProfileForm />
+          </TabsContent>
+          <TabsContent value="Career">
+            <JobList />
+          </TabsContent>
+          <TabsContent value="Education">
+            <EducationList />
+          </TabsContent>
+          <TabsContent value="Services">
+            <ServiceList />
+          </TabsContent>
+        </Tabs>
 
-      <div className="container-width">
-        <UpdateProfileForm />
-      </div>
-      <Line/>
-      <JobList />
-      <Line/>
-      <EducationList />
+      
       <Line/>
     </div>
   );

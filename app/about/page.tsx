@@ -1,56 +1,16 @@
-"use client";
-
 import Career from "@/components/custom/about/Career";
 import Education from "@/components/custom/about/Education";
 import Profile from "@/components/custom/herosection/Profile";
-import ProfileActions from "@/components/custom/herosection/ProfileActions";
 import { Line } from "@/components/custom/navbar/line";
-import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 export default function AboutPage() {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({
-    name: "",
-    email: "",
-    profilePicture: "",
-    resumeLink: "",
-    bio: "",
-  });
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const res = await fetch("/api/home/profile");
-        const data = await res.json();
-        if (res.ok) {
-          setUser({
-            name: data.name || "",
-            email: data.email || "",
-            profilePicture: data.profilePicture || "",
-            resumeLink: data.resumeLink || "",
-            bio: data.bio || "",
-          });
-        } else {
-          console.log(data.error || "Could not fetch user data!");
-        }
-      } catch (err) {
-        console.log("Error in loading profile on home page : " + err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
-  if (loading) {
-    return (
-      <section className="w-full min-h-screen flex-center flex-col">
-        <p>Loading...</p>
-      </section>
-    );
-  }
+  
 
   return (
     <section className="w-full h-full flex-center flex-col">
       <Profile
-        user={user}
         textAlignment="text-justify"
         showProfilePicture={false}
       />
@@ -58,7 +18,13 @@ export default function AboutPage() {
       <Career />
       <Line />
       <Education />
-      <ProfileActions ReadMore={false} user={user} />
+      <div className="flex flex-col gap-4 justify-center">
+        <Button asChild variant={"secondary"} className=" text-sm">
+          <Link href="/services">
+            Services<ArrowRight className="w-4 h-4" />
+          </Link>
+        </Button>
+      </div>
     </section>
   );
 }
