@@ -19,7 +19,7 @@ export async function GET() {
 
         if (typeof decoded !== "string" && "userId" in decoded) {
             const service = await Service.find({user: decoded.userId}).sort({createdAt: -1});
-            console.log(service);
+            //console.log(service);
             return NextResponse.json(service);
         }
 

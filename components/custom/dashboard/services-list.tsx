@@ -34,7 +34,25 @@ export default function ServiceList() {
         })
         .catch(() => toast.error("Exception in Service API"))
         .finally(() => setLoading(false));
-    })
+    },[])
+
+    const handleDelete = (id: string) => {
+        startTransition(() => {
+            fetch(`/api/dashboard/service/${id}`, {
+                method: "DELETE",
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.success) {
+                    toast.success("Service deleted");
+                    setService((prev) => prev.filter((service) => service._id.toString() !== id));
+                } else {
+                    toast.error(data.error || "Failed to delete Service");
+                }
+            })
+            .catch(() => toast.error("Failed to delete service!"))
+        })
+    }
 
     if (loading) {
         return (
@@ -100,7 +118,7 @@ export default function ServiceList() {
                                     </div>
                                     </AccordionContent>
                                 </AccordionItem>
-                                <AccordionItem value="client">
+                                <AccordionItem value="Experience">
                                     <AccordionTrigger className="no-underline md:text-lg text-sm hover:no-underline focus:no-underline">
                                     Experience
                                     </AccordionTrigger>

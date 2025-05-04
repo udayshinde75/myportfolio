@@ -43,7 +43,7 @@ export default function EducationList() {
                     toast.success("Education deleted");
                     setEducation((prev) => prev.filter((education) => education._id.toString() !== id));
                 } else {
-                    toast.error(data.error || "Failed to delete job");
+                    toast.error(data.error || "Failed to delete education");
                 }
             })
             .catch(() => toast.error("Failed to delete education!"))
