@@ -3,7 +3,7 @@ import { JobForm } from "@/components/custom/dashboard/job-form";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Job() {
+export default function JobPageContent() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true)
   const jobId = searchParams.get('id');

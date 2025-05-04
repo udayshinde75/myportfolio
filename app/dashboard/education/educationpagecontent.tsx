@@ -3,7 +3,7 @@ import { EducationForm } from "@/components/custom/dashboard/education-form";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export default function Job() {
+export default function EducationPageContent() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true)
   const educationId = searchParams.get('id');
@@ -55,7 +55,7 @@ export default function Job() {
                 score:data.score,
                 scoreType: data.scoreType,
             })
-          console.log("Education:"+education)
+          //console.log("Education:"+education)
         } else {
           setLoading(false)
           return
