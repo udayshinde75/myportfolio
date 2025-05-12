@@ -1,54 +1,62 @@
 "use client";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+
 import { motion } from "framer-motion";
+import Service from "./service";
+import { ServiceProps } from "./service";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function ServiceLayout() {
+  const [services, setServices] = useState<ServiceProps[]>([]);
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetch("/api/service")
+        .then((res) => res.json())
+        .then((data) => {
+        if (Array.isArray(data)) {
+          setServices(data);
+        } else {
+            toast.error("Unexpected response format");
+            console.error("Service API response was not an array:", data);
+        }
+        })
+        .catch(() => toast.error("Failed to fetch Services"))
+        .finally(()=>{
+          setLoading(false)
+        })
+    }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center">
+        <p className="text-gray-600">Loading Services...</p>
+      </div>
+    );
+  }  
   return (
     <motion.div
       className="flex-col pb-5 container-width"
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8 }}
+      transition={{ duration: 0.5 }}
     >
-      <h2 className="text-3xl font-semibold mb-4">Fullstack Developer</h2>
-
-      <Accordion type="single" collapsible defaultValue="recruiter" className="w-full">
-        {/* Recruiter Section */}
-        <AccordionItem value="recruiter">
-          <AccordionTrigger className="no-underline md:text-lg text-sm hover:no-underline focus:no-underline">
-            👩‍💼 Are you a Recruiter?
-          </AccordionTrigger>
-          <AccordionContent>
-            <div
-              className="md:text-lg text-sm text-muted-foreground"
-            >
-              I build reliable fullstack apps using C#, .NET Core, React, and Node.js—clean code,
-              scalable systems, and well-documented APIs to support development teams efficiently.
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-
-        {/* Client Section */}
-        <AccordionItem value="client">
-          <AccordionTrigger className="no-underline md:text-lg text-sm hover:no-underline focus:no-underline">
-            👩‍💻 Are you a Client?
-          </AccordionTrigger>
-          <AccordionContent>
-            <div
-              className="md:text-lg text-sm text-muted-foreground"
-            >
-              I create easy-to-use, clean, and smooth websites or apps. Whether it’s a portfolio,
-              a booking system, or something custom, we’ll make it functional and good-looking!
-            </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+      {services.length === 0 
+      ? (
+        <div className="flex items-center justify-center">
+          <p className="text-gray-600">Loading Services...</p>
+        </div>
+      ) : services.map((service) => (
+            <Service 
+             key={service.title}
+              title={service.title}
+              Experience={service.Experience}
+              InfoForRecruiters={service.InfoForRecruiters}
+              InfoForClients={service.InfoForClients}
+            
+            />
+        ))}
+      
     </motion.div>
   );
 }

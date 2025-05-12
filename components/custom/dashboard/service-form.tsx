@@ -120,7 +120,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                       <FormLabel>Service Title</FormLabel>
                       <FormControl>
                         <Input
-                          placeholder="e.g. Bachelor of Computer Application"
+                          placeholder="e.g. Fullstack Developer"
                           {...field}
                           disabled={isPending}
                         />

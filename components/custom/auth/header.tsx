@@ -19,7 +19,7 @@ export const Header = ({
         )}>
             
         </h1>
-        <p className="text-muted-foreground text-sm">
+        <p className="font-bold text-2xl">
             {label}
         </p>
     </div>
