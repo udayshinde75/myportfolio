@@ -13,7 +13,7 @@ export default function HeroSection() {
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.5 }}
         className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl"
       >
         <Image
