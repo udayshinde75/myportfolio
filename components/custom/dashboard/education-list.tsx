@@ -74,11 +74,12 @@ export default function EducationList() {
     
           {education.length === 0
             ? toast.dismiss("You have not added education yet!")
-            : education.map((data) => (
+            : education.map((data,index) => (
                 <motion.div
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: index * 0.2 }}
                   key={data._id.toString()}
                 >
                   <Card

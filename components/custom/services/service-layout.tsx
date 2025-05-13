@@ -46,7 +46,14 @@ export default function ServiceLayout() {
         <div className="flex items-center justify-center">
           <p className="text-gray-600">Loading Services...</p>
         </div>
-      ) : services.map((service) => (
+      ) : services.map((service,index) => (
+        <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+          >
             <Service 
              key={service.title}
               title={service.title}
@@ -55,6 +62,7 @@ export default function ServiceLayout() {
               InfoForClients={service.InfoForClients}
             
             />
+            </motion.div>
         ))}
       
     </motion.div>
