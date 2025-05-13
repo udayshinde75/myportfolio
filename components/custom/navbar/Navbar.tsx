@@ -26,10 +26,10 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-       className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[75%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between  backdrop-blur-xl bg-opacity-80 z-50">
-        <div className="container mx-auto flex items-center justify-between w-full p-4">
+       className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[80%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between  backdrop-blur-xl bg-opacity-80 z-50">
+        <div className="container mx-auto flex items-center justify-between w-full p-4 gap-x-6">
           {/* Logo */}
-          <Link href={`/`} className="text-lg font-bold text-gray-500 hover:text-gray-900 dark:text-gray-100 dark:hover:text-gray-900 transition-colors duration-1000">
+          <Link href={`/`} className="text-lg font-bold text-gray-900 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-300 transition-colors duration-1000">
             FluidDev
           </Link>
           {/* Desktop Menu */}
@@ -37,7 +37,7 @@ export default function Navbar() {
             <NavLink href={`/`} label="Home"/>
             <NavLink href={`/about`} label="About" />
             <NavLink href={`/services`} label="Services" />
-            <NavLink href={`/projects`} label="My Projects" />
+            <NavLink href={`/projects`} label="Projects" />
             <NavLink href={`/contact`} label="Contact" />
             <NavItem href={`/auth/signin`} icon={<User />} />
             {/*<NavItem href="/auth/generate-passkey" icon={<Key />} />*/}

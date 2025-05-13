@@ -77,11 +77,12 @@ export default function ServiceList() {
             </div>
             {service.length === 0
                 ? toast.dismiss("You have not added servcies yet!")
-                : service.map((data) => (
+                : service.map((data,index) => (
                     <motion.div
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5 }}
+            initial={{ opacity: 0, y: 200 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
                     key={data._id.toString()}
                     >
                         <Card

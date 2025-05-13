@@ -52,11 +52,12 @@ export default function Education() {
             <h2 className="text-3xl font-semibold text-justify">Education</h2>
             {education.length === 0
         ? toast.dismiss("You have not added any work experience yet")
-        : education.map((edu) => (
+        : education.map((edu,index) => (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
               key={edu._id}
             >
                 <div  className="mt-2">
