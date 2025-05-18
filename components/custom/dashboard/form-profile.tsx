@@ -18,7 +18,11 @@ const UpdateSchema = z.object({
     email: z.string().email("Invalid email address"),
     profilePicture: z.string().optional(),
     resumeLink: z.string().optional(),
-    bio: z.string().optional()
+    bio: z.string().optional(),
+    linkedIn: z.string().optional(),
+    instagram: z.string().optional(),
+    github: z.string().optional(),
+    twitter: z.string().optional(),
 })
 
 type UpdateFormData = z.infer<typeof UpdateSchema>;
@@ -36,7 +40,11 @@ export const UpdateProfileForm = () => {
             email: "",
             profilePicture: "",
             resumeLink: "",
-            bio: ""
+            bio: "",
+            linkedIn: "",
+            instagram: "",
+            github: "",
+            twitter: "",
         }
     });
 
@@ -52,6 +60,10 @@ export const UpdateProfileForm = () => {
                         profilePicture: data.profilePicture || "",
                         resumeLink: data.resumeLink || "",
                         bio: data.bio || "",
+                        linkedIn: data.linkedIn || "",
+                        instagram: data.instagram || "",
+                        github: data.github || "",
+                        twitter: data.twitter || "",
                     })
                 } else {
                     setError((data.error) || "Could not fetch user data!");
@@ -67,7 +79,7 @@ export const UpdateProfileForm = () => {
     const onSubmit = (data: UpdateFormData) => {
         setError("");
         setSuccess("");
-
+        console.log(data)
         startTransition(() => {
             fetch("/api/dashboard/updateProfile",{
                 method: "PUT",
@@ -153,6 +165,82 @@ export const UpdateProfileForm = () => {
                                 </FormItem>
                             )}
                         />
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="linkedIn"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Linked In</FormLabel>
+                                    <FormControl>
+                                    <Input
+                                        placeholder=""
+                                        {...field}
+                                        type="url"
+                                        disabled={isPending}
+                                    />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="instagram"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Instagram</FormLabel>
+                                    <FormControl>
+                                    <Input
+                                        placeholder=""
+                                        {...field}
+                                        type="url"
+                                        disabled={isPending}
+                                    />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <FormField
+                                control={form.control}
+                                name="github"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Github</FormLabel>
+                                    <FormControl>
+                                    <Input
+                                        placeholder=""
+                                        {...field}
+                                        type="url"
+                                        disabled={isPending}
+                                    />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="twitter"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Twitter</FormLabel>
+                                    <FormControl>
+                                    <Input
+                                        placeholder=""
+                                        {...field}
+                                        type="url"
+                                        disabled={isPending}
+                                    />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+                        </div>
                         <FormField
                             control={form.control}
                             name="bio"

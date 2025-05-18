@@ -22,7 +22,7 @@ export const CardWrapper = ({
     icon,
 } : CardWrapperProps) => {
     return (
-        <Card className=" shadow-xl md:border border-none mt-10  border-gray-500 rounded-3xl px-3   backdrop-blur-xl bg-opacity-80 ">
+        <Card className=" shadow-xl md:border mt-10  border-gray-500 rounded-3xl px-3   backdrop-blur-xl bg-opacity-80 ">
             <CardHeader>
                 <Header label={headerLabel}/>
             </CardHeader>

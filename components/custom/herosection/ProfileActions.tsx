@@ -29,7 +29,7 @@ export default function ProfileActions({
         </Button>
       )}
       <Button asChild className="px-6 py-3 mx-auto">
-        <Link href="/#contact">Hire Me</Link>
+        <Link href="/contact">Contect me</Link>
       </Button>
       <Button asChild variant="outline" className="px-6 py-3 mx-auto">
         <Link href={user.resumeLink} target="_blank">

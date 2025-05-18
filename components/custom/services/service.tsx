@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Line, VerticalLine } from "../navbar/line";
+import { VerticalLine } from "../navbar/line";
 
 export interface ServiceProps {
     title?: string;
