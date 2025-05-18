@@ -42,7 +42,7 @@ export default function ContactPage() {
           if (data.email) links.push({ type: "email", link: `mailto:${data.email}` });
           if (data.twitter) links.push({ type: "twitter", link: data.twitter });
           if (data.instagram) links.push({ type: "instagram", link: data.instagram });
-          if (data.linkedin) links.push({ type: "linkedin", link: data.linkedin });
+          if (data.linkedIn) links.push({ type: "linkedin", link: data.linkedIn });
           if (data.github) links.push({ type: "github", link: data.github });
 
           setContactData(links);
