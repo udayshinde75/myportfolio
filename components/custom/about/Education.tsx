@@ -28,19 +28,23 @@ interface EducationType {
 
 export default function Education() {
     const [education, setEducation] = useState<EducationType[]>([]);
-    useEffect(()=>{
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
         fetch("api/about/education")
-        .then((res) => res.json())
-        .then((data) => {
-            if (Array.isArray(data)) {
-                setEducation(data)
-                console.log("Education Data:",data);
-            } else {
-                toast.error("Unexpected response format")
-                console.error("Education API response was not an array:", data);
-            }
-        }).catch(() => toast.error("Failed to fetch education"))
-    }, [])
+            .then((res) => res.json())
+            .then((data) => {
+                if (Array.isArray(data)) {
+                    setEducation(data);
+                    console.log("Education Data:", data);
+                } else {
+                    toast.error("Unexpected response format");
+                    console.error("Education API response was not an array:", data);
+                }
+            })
+            .catch(() => toast.error("Failed to fetch education"))
+            .finally(() => setLoading(false));
+    }, []);
     
     return (
         <motion.div
@@ -50,49 +54,50 @@ export default function Education() {
             transition={{ duration: 1 }}
         >
             <h2 className="text-3xl font-semibold text-justify">Education</h2>
-            {education.length === 0
-        ? toast.dismiss("You have not added any work experience yet")
-        : education.map((edu,index) => (
-            <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-              key={edu._id}
-            >
-                <div  className="mt-2">
-                    <div className="flex items-center justify-center gap-x-2">
-                        <div className="rounded-full overflow-hidden">
-                            <Image
-                                src={edu.universityIcon}
-                                alt="University Icon"
-                                height={100}
-                                width={100}
-                                className="object-cover"
-                            />
-                        </div>
-                        <div className="w-full mx-auto">
-                            <div className="flex justify-between items-center">
-                                <h2 className="md:text-lg text-xs font-semibold text-left">{edu.title} <br/> {edu.location}</h2>
-                                <h2 className="md:text-lg text-xs font-semibold text-right">{edu.startDate}-{edu.endDate}</h2>
+            {loading ? (
+                <p className="text-muted-foreground mt-2">Loading...</p>
+            ) : education.length === 0 ? (
+                <p className="text-muted-foreground mt-2">No education details added yet.</p>
+            ) : (
+                education.map((edu, index) => (
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: index * 0.2 }}
+                        key={edu._id}
+                    >
+                        <div className="mt-2">
+                            <div className="flex items-center justify-center gap-x-2">
+                                <div className="rounded-full overflow-hidden">
+                                    <Image
+                                        src={edu.universityIcon}
+                                        alt="University Icon"
+                                        height={100}
+                                        width={100}
+                                        className="object-cover"
+                                    />
+                                </div>
+                                <div className="w-full mx-auto">
+                                    <div className="flex justify-between items-center">
+                                        <h2 className="md:text-lg text-xs font-semibold text-left">{edu.title} <br/> {edu.location}</h2>
+                                        <h2 className="md:text-lg text-xs font-semibold text-right">{edu.startDate}-{edu.endDate}</h2>
+                                    </div>
+                                </div>
                             </div>
-                            
-                        </div>
-                    </div>
-                    <Button variant={"link"}  className="p-0 mt-2">
-                            <Link  href={edu.universityLink || ""} className="p-0 md:text-lg text-xs flex flex-center gap-x-2">{edu.universityName} <Globe /></Link>
+                            <Button variant={"link"} className="p-0 mt-2">
+                                <Link href={edu.universityLink || ""} className="p-0 md:text-lg text-xs flex flex-center gap-x-2">{edu.universityName} <Globe /></Link>
                             </Button>
-                    <p className="text-muted-foreground mt-2 md:text-lg text-xs  text-justify">{edu.description}</p>
-                    <h2 className="text-sm font-semibold text-left">{edu.scoreType} - {edu.score}</h2>
-                    <div>
-                        <SkillTags skills={edu.skills} />
-                    </div>
-                    <VerticalLine />
-                </div>
-                
-            </motion.div>
-        ))}
-            
+                            <p className="text-muted-foreground mt-2 md:text-lg text-xs text-justify">{edu.description}</p>
+                            <h2 className="text-sm font-semibold text-left">{edu.scoreType} - {edu.score}</h2>
+                            <div>
+                                <SkillTags skills={edu.skills} />
+                            </div>
+                            <VerticalLine />
+                        </div>
+                    </motion.div>
+                ))
+            )}
         </motion.div>
-    ); 
+    );
 }

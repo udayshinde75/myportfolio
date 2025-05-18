@@ -1,3 +1,5 @@
+"use client";
+
 import Career from "@/components/custom/about/Career";
 import Education from "@/components/custom/about/Education";
 import Profile from "@/components/custom/herosection/Profile";
