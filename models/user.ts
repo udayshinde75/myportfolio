@@ -10,6 +10,10 @@ export interface IUser extends Document {
     profilePicture?: string;
     resumeLink?: string;
     bio?: string;
+    linkedIn?: string;
+    instagram?: string;
+    github?: string;
+    twitter?: string;
 }
 
 // Create the schema
@@ -45,6 +49,18 @@ const UserSchema = new Schema<IUser>({
     bio : {
         type : String,
         default : ""
+    },
+    linkedIn : {
+        type : String,
+    },
+    instagram : {
+        type : String,
+    },
+    github : {
+        type : String,
+    },
+    twitter : {
+        type : String,
     }
 });
 

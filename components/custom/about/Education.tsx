@@ -61,27 +61,28 @@ export default function Education() {
               key={edu._id}
             >
                 <div  className="mt-2">
-                    <div className="flex items-center justify-start gap-x-2">
-                        <div className="w-32 h-28 relative rounded-full overflow-hidden">
+                    <div className="flex items-center justify-center gap-x-2">
+                        <div className="rounded-full overflow-hidden">
                             <Image
                                 src={edu.universityIcon}
                                 alt="University Icon"
-                                fill
+                                height={100}
+                                width={100}
                                 className="object-cover"
                             />
                         </div>
-                        <div className="w-full">
+                        <div className="w-full mx-auto">
                             <div className="flex justify-between items-center">
-                                <h2 className="text-xl font-semibold text-left">{edu.title} <br/> {edu.location}</h2>
-                                <h2 className="text-xs font-semibold text-right">{edu.startDate} - {edu.endDate}</h2>
+                                <h2 className="md:text-lg text-xs font-semibold text-left">{edu.title} <br/> {edu.location}</h2>
+                                <h2 className="md:text-lg text-xs font-semibold text-right">{edu.startDate}-{edu.endDate}</h2>
                             </div>
-                            <Button variant={"link"}  className="p-0">
-                            <Link  href={edu.universityLink || ""} className="p-0 flex flex-center gap-x-2">{edu.universityName} <Globe /></Link>
-                            </Button>
+                            
                         </div>
                     </div>
-                
-                    <p className="text-muted-foreground mt-2 md:text-lg text-sm  text-justify">{edu.description}</p>
+                    <Button variant={"link"}  className="p-0 mt-2">
+                            <Link  href={edu.universityLink || ""} className="p-0 md:text-lg text-xs flex flex-center gap-x-2">{edu.universityName} <Globe /></Link>
+                            </Button>
+                    <p className="text-muted-foreground mt-2 md:text-lg text-xs  text-justify">{edu.description}</p>
                     <h2 className="text-sm font-semibold text-left">{edu.scoreType} - {edu.score}</h2>
                     <div>
                         <SkillTags skills={edu.skills} />

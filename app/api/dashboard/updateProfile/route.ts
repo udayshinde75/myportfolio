@@ -31,11 +31,16 @@ export async function PUT(req: Request) {
                         email: body.email || user.email,
                         profilePicture: body.profilePicture || user.profilePicture || "",
                         resumeLink: body.resumeLink || user.resumeLink || "",
-                        bio: body.bio || user.bio || ""
+                        bio: body.bio || user.bio || "",
+                        linkedIn: body.linkedIn || user.linkedIn || "",
+                        instagram: body.instagram || user.instagram || "",
+                        github: body.github || user.github || "",
+                        twitter: body.twitter || user.twitter || "",
                     }
                 },
                 {new: true}
             )
+            console.log(updated)
             if (!updated) {
                 return NextResponse.json({error: "User not found"}, {status: 404});
             }

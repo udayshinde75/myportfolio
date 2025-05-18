@@ -8,6 +8,7 @@ import JobList from "@/components/custom/dashboard/job-list";
 import EducationList from "@/components/custom/dashboard/education-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ServiceList from "@/components/custom/dashboard/services-list";
+import ProjectList from "@/components/custom/dashboard/project-list";
 
 interface User {
   _id: string;
@@ -97,9 +98,6 @@ export default function Dashboard() {
         <p className="text-muted-foreground text-sm sm:text-base">
           Email: {user.email}
         </p>
-        <Button onClick={handleLogout} className="mx-auto">
-          Messages
-        </Button>
       </div>
       <Line/>
       
@@ -113,6 +111,7 @@ export default function Dashboard() {
             <TabsTrigger value="Career" className="w-full">Career</TabsTrigger>
             <TabsTrigger value="Education" className="w-full">Education</TabsTrigger>
             <TabsTrigger value="Services" className="w-full">Services</TabsTrigger>
+            <TabsTrigger value="Projects" className="w-full">Projects</TabsTrigger>
           </TabsList>
           <TabsContent value="Account">
             <UpdateProfileForm />
@@ -125,6 +124,9 @@ export default function Dashboard() {
           </TabsContent>
           <TabsContent value="Services">
             <ServiceList />
+          </TabsContent>
+          <TabsContent value="Projects">
+            <ProjectList />
           </TabsContent>
         </Tabs>
 
