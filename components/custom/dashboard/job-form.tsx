@@ -24,6 +24,10 @@ import { FormError } from "../auth/form-error";
 import { FormSuccess } from "../auth/form-success";
 import { useRouter } from "next/navigation";
 
+/**
+ * Schema for job form validation
+ * Defines validation rules for all job-related fields
+ */
 const JobSchema = z.object({
   title: z.string().min(1, "Job Title is required!"),
   startDate: z.string().min(1, "Start Date is required!"),
@@ -37,6 +41,10 @@ const JobSchema = z.object({
 
 type JobFormValues = z.infer<typeof JobSchema>;
 
+/**
+ * Interface defining the structure of a job entry
+ * Used for both creating new jobs and editing existing ones
+ */
 interface JobType {
   _id?: string;
   title: string;
@@ -49,6 +57,21 @@ interface JobType {
   skills: string[];
 }
 
+/**
+ * JobForm Component
+ * 
+ * Form component for adding or editing job entries
+ * Features:
+ * - Form validation using Zod schema
+ * - Support for both create and edit modes
+ * - Real-time field validation
+ * - Toast notifications for success/error states
+ * - Animated form transitions
+ * 
+ * @param {Object} props - Component props
+ * @param {JobType} props.initialData - Optional initial data for edit mode
+ * @returns {JSX.Element} The job form
+ */
 export const JobForm = ({ initialData }: { initialData?: JobType }) => {
   const router = useRouter();
   const isEditMode = !!initialData?._id;
@@ -58,6 +81,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  // Initialize form with validation and default values
   const form = useForm<JobFormValues>({
     resolver: zodResolver(JobSchema),
     defaultValues: {
@@ -74,6 +98,11 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
     },
   });
 
+  /**
+   * Form submission handler
+   * Processes form data and sends to appropriate API endpoint
+   * Handles both create and update operations
+   */
   const onSubmit = (values: JobFormValues) => {
     setError("");
     setSuccess("");
@@ -112,6 +141,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
         });
     });
   };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -126,6 +156,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Job title field */}
             <FormField
               control={form.control}
               name="title"
@@ -144,6 +175,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
               )}
             />
 
+            {/* Date range fields */}
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -180,6 +212,8 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                 )}
               />
             </div>
+
+            {/* Company information fields */}
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -216,6 +250,8 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                 )}
               />
             </div>
+
+            {/* Company website link field */}
             <FormField
               control={form.control}
               name="companyLink"
@@ -233,6 +269,8 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                 </FormItem>
               )}
             />
+
+            {/* Job description field */}
             <FormField
               control={form.control}
               name="description"
@@ -250,6 +288,8 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                 </FormItem>
               )}
             />
+
+            {/* Skills field */}
             <FormField
               control={form.control}
               name="skills"
@@ -258,7 +298,7 @@ export const JobForm = ({ initialData }: { initialData?: JobType }) => {
                   <FormLabel>Skills</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="e.g. React, Node.js, MongoDB"
+                      placeholder="e.g. MongoDB, React.js, Node.js"
                       {...field}
                       disabled={isPending}
                     />

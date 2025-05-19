@@ -8,6 +8,10 @@ import { Description } from "./description";
 import { motion } from "framer-motion";
 import SkillTags from "../about/SkillTags";
 
+/**
+ * Interface defining the structure of a job entry
+ * Used for displaying and managing job experiences
+ */
 interface JobType {
   _id: string;
   title: string;
@@ -20,12 +24,30 @@ interface JobType {
   skills: string[];
 }
 
+/**
+ * JobList Component
+ * 
+ * Displays a list of user's job experiences with options to add, edit, and delete entries
+ * Features:
+ * - Fetches and displays jobs from the API
+ * - Animated transitions for list items
+ * - Job cards with company details, dates, and skills
+ * - Edit and delete functionality
+ * - Loading state handling
+ * 
+ * @returns {JSX.Element} The job list component
+ */
 export default function JobList() {
   const [jobs, setJobs] = useState<JobType[]>([]);
   const [isPending, startTransition] = useTransition();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
+  /**
+   * Fetches jobs from the API on component mount
+   * Updates the jobs state with the fetched data
+   * Handles loading state and error cases
+   */
   useEffect(() => {
     fetch("/api/dashboard/jobs")
       .then((res) => res.json())
@@ -41,6 +63,13 @@ export default function JobList() {
       .finally(() => setLoading(false));
   }, []);
 
+  /**
+   * Handles job deletion
+   * Sends DELETE request to the API and updates the local state
+   * Shows success/error toast notifications
+   * 
+   * @param {string} id - The ID of the job to delete
+   */
   const handleDelete = (id: string) => {
     startTransition(() => {
       fetch(`/api/dashboard/jobs/${id}`, {
@@ -60,6 +89,7 @@ export default function JobList() {
     });
   };
 
+  // Show loading state while fetching jobs
   if (loading) {
     return (
       <div className="space-y-4">
@@ -75,6 +105,7 @@ export default function JobList() {
       transition={{ duration: 0.5 }}
       className="space-y-6 m-5"
     >
+      {/* Header with title and add job button */}
       <div className="flex justify-between items-center">
         <h2 className="text-xl font-semibold">Career Data</h2>
         <Button onClick={() => router.push("/dashboard/jobs/new")}>
@@ -82,6 +113,7 @@ export default function JobList() {
         </Button>
       </div>
 
+      {/* Job list or empty state message */}
       {jobs.length === 0
         ? toast.dismiss("You have not added any work experience yet")
         : jobs.map((job) => (
@@ -91,14 +123,16 @@ export default function JobList() {
               transition={{ duration: 1 }}
               key={job._id}
             >
+              {/* Job card with content */}
               <Card
-                
                 className="shadow-xl md:border border-none mt-10  border-gray-500 rounded-3xl px-3   backdrop-blur-xl bg-opacity-80 "
               >
                 <CardContent className="p-6">
+                  {/* Job title and company details */}
                   <div className="flex justify-between items-center">
                     <div>
                       <h3 className="text-xl font-semibold">{job.title}</h3>
+                      {/* Company name with optional link */}
                       <p className="text-sm text-muted-foreground">
                         {job.companyLink ? (
                           <a
@@ -112,6 +146,7 @@ export default function JobList() {
                           job.companyName
                         )}
                       </p>
+                      {/* Location and date range */}
                       <p className="text-sm text-muted-foreground">
                         {job.location}
                       </p>
@@ -120,8 +155,10 @@ export default function JobList() {
                       </p>
                     </div>
                   </div>
+                  {/* Job description and skills */}
                   <Description description={job.description} />
                   <SkillTags skills={job.skills} />
+                  {/* Edit and delete buttons */}
                   <div className="space-x-2 flex-center mt-2">
                     <Button
                       variant="outline"

@@ -1,3 +1,15 @@
+/**
+ * Project Page Content Component
+ * 
+ * Component for managing project entries
+ * Features:
+ * - Handles both create and edit modes
+ * - Fetches project data for editing
+ * - Loading state management
+ * - Responsive layout
+ * 
+ * @returns {JSX.Element} The project form with appropriate data
+ */
 "use client"
 
 import { ProjectForm } from "@/components/custom/dashboard/project-form";
@@ -9,6 +21,8 @@ export default function ProjectPageContent() {
   const [loading, setLoading] = useState(true)
   const projectId = searchParams.get('id');
   console.log("Project ID:", projectId)
+
+  // Initialize project state with default values
   const[project, setProject] = useState({
     _id:"",
     projectName: "",
@@ -20,6 +34,10 @@ export default function ProjectPageContent() {
     projectPictureUrl: "",
   })
 
+  /**
+   * Effect hook to fetch project data when in edit mode
+   * Handles loading states and error cases
+   */
   useEffect(() => {
     if (!projectId) {
       setLoading(false)
@@ -61,6 +79,7 @@ export default function ProjectPageContent() {
     fetchProject();
   }, [projectId]);
 
+  // Show loading state while fetching project data
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">

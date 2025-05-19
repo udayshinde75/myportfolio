@@ -1,3 +1,15 @@
+/**
+ * Job Page Content Component
+ * 
+ * Component for managing job entries
+ * Features:
+ * - Handles both create and edit modes
+ * - Fetches job data for editing
+ * - Loading state management
+ * - Responsive layout
+ * 
+ * @returns {JSX.Element} The job form with appropriate data
+ */
 "use client"
 import { JobForm } from "@/components/custom/dashboard/job-form";
 import { useSearchParams } from "next/navigation";
@@ -8,6 +20,8 @@ export default function JobPageContent() {
   const [loading, setLoading] = useState(true)
   const jobId = searchParams.get('id');
   console.log("Job ID:", jobId)
+
+  // Initialize job state with default values
   const[job, setJob] = useState({
     _id:"",
     title: "",
@@ -20,6 +34,10 @@ export default function JobPageContent() {
     skills: [],
   })
 
+  /**
+   * Effect hook to fetch job data when in edit mode
+   * Handles loading states and error cases
+   */
   useEffect(() => {
     if (!jobId) {
       setLoading(false)
@@ -62,6 +80,7 @@ export default function JobPageContent() {
     fetchJob();
   }, [jobId]);
 
+  // Show loading state while fetching job data
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">

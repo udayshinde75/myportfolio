@@ -6,7 +6,7 @@ import { z } from "zod";
 import { useState, useTransition } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { ChevronDown, ChevronUp, Home } from "lucide-react";
+import { Home } from "lucide-react";
 
 import {
   Form,
@@ -29,10 +29,13 @@ import {
     SelectValue,
     SelectContent,
     SelectItem,
-    SelectScrollUpButton,
-    SelectScrollDownButton,
   } from "@/components/ui/select"
   import { CircleDot, PercentCircle, BadgeCheck } from "lucide-react"
+
+/**
+ * Schema for education form validation
+ * Defines validation rules for all education-related fields
+ */
 export const EducationSchema = z.object({
     title: z.string().min(1, "Education Title is required"),
     startDate: z.string().min(1, "Start Date is required"),
@@ -51,6 +54,10 @@ export const EducationSchema = z.object({
     }),
 });
 
+/**
+ * Interface defining the structure of an education entry
+ * Used for both creating new education entries and editing existing ones
+ */
 interface IEducation {
     _id: string;
     title: string;
@@ -67,9 +74,24 @@ interface IEducation {
     scoreType:string;
 }
 
-
 type EducationFormValues = z.infer<typeof EducationSchema>;
 
+/**
+ * EducationForm Component
+ * 
+ * Form component for adding or editing education entries
+ * Features:
+ * - Form validation using Zod schema
+ * - Support for both create and edit modes
+ * - Real-time field validation
+ * - Toast notifications for success/error states
+ * - Animated form transitions
+ * - Score type selection with custom icons
+ * 
+ * @param {Object} props - Component props
+ * @param {IEducation} props.initialData - Optional initial data for edit mode
+ * @returns {JSX.Element} The education form
+ */
 export const EducationForm = ({ initialData }: { initialData?: IEducation }) => {
     const router = useRouter();
     const isEditMode = !!initialData?._id;
@@ -79,6 +101,7 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
     const [success, setSuccess] = useState("");
     const [isPending, startTransition] = useTransition();
 
+    // Initialize form with validation and default values
     const form = useForm<EducationFormValues>({
         resolver: zodResolver(EducationSchema),
         defaultValues: {
@@ -101,6 +124,11 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
         },
     });
 
+    /**
+     * Form submission handler
+     * Processes form data and sends to appropriate API endpoint
+     * Handles both create and update operations
+     */
     const onSubmit = (values: EducationFormValues) => {
         setError("");
         setSuccess("");
@@ -154,6 +182,7 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                {/* Education title field */}
                 <FormField
                   control={form.control}
                   name="title"
@@ -172,6 +201,7 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
                   )}
                 />
     
+                {/* Date range fields */}
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -208,6 +238,8 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
                     )}
                   />
                 </div>
+
+                {/* University information fields */}
                 <div className="grid grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
@@ -244,43 +276,46 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
                     )}
                   />
                 </div>
+
+                {/* University links and icon fields */}
                 <div className="grid grid-cols-2 gap-4">
                     <FormField
                     control={form.control}
                     name="universityLink"
                     render={({ field }) => (
-                        <FormItem>
+                      <FormItem>
                         <FormLabel>University Link</FormLabel>
                         <FormControl>
-                            <Input
+                          <Input
                             placeholder="https://example.com"
                             {...field}
                             disabled={isPending}
-                            />
+                          />
                         </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="universityIcon"
-                        render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>University Icon</FormLabel>
-                            <FormControl>
-                            <Input
-                                placeholder="google drive file link"
-                                {...field}
-                                disabled={isPending}
-                            />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                        )}
-                    />
+                  />
+                  <FormField
+                    control={form.control}
+                    name="universityIcon"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>University Icon URL</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="https://example.com/icon.png"
+                            {...field}
+                            disabled={isPending}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
-                
+
+                {/* Description field */}
                 <FormField
                   control={form.control}
                   name="description"
@@ -289,7 +324,7 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
                       <FormLabel>Description</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="What did you do?"
+                          placeholder="Describe your education experience..."
                           {...field}
                           disabled={isPending}
                         />
@@ -315,81 +350,67 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
                         </FormItem>
                     )}
                 />
-                <div className="flex flex-between md:flex-row flex-col gap-4">
-                    <FormField
+
+                {/* Score information fields */}
+                <div className="grid grid-cols-2 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="score"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Score</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="e.g. 8.5"
+                            {...field}
+                            disabled={isPending}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
                     control={form.control}
                     name="scoreType"
                     render={({ field }) => (
-                        <FormItem className="w-full">
+                      <FormItem>
                         <FormLabel>Score Type</FormLabel>
-                        <FormControl>
                         <Select
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                        disabled={isPending}
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          disabled={isPending}
                         >
-                        <SelectTrigger className="w-full border-gray-300 shadow-sm hover:border-gray-400 focus:ring-1 focus:ring-blue-500 transition-all duration-200 rounded-xl">
-                            <SelectValue placeholder="Select Type" />
-                        </SelectTrigger>
-                        <SelectContent
-                        position="popper"
-                        avoidCollisions={false}
-                        className="z-[999] bg-white border border-gray-200 shadow-xl rounded-xl text-gray-900"
-                        >
-                        <SelectScrollUpButton className="flex justify-center items-center p-2">
-                            <ChevronUp className="h-4 w-4" />
-                        </SelectScrollUpButton>
-
-                        {/* Items */}
-                        <SelectItem value="CGPA" className="cursor-pointer hover:bg-blue-50 rounded-md px-3 py-2">
-                            <div className="flex items-center gap-2">
-                            <CircleDot className="h-4 w-4 text-indigo-600" />
-                            CGPA
-                            </div>
-                        </SelectItem>
-
-                        <SelectItem value="Percentage" className="cursor-pointer hover:bg-blue-50 rounded-md px-3 py-2">
-                            <div className="flex items-center gap-2">
-                            <PercentCircle className="h-4 w-4 text-green-600" />
-                            Percentage
-                            </div>
-                        </SelectItem>
-
-                        <SelectItem value="Grade" className="cursor-pointer hover:bg-blue-50 rounded-md px-3 py-2">
-                            <div className="flex items-center gap-2">
-                            <BadgeCheck className="h-4 w-4 text-yellow-600" />
-                            Grade
-                            </div>
-                        </SelectItem>
-
-                        <SelectScrollDownButton className="flex justify-center items-center p-2">
-                            <ChevronDown className="h-4 w-4" />
-                        </SelectScrollDownButton>
-                        </SelectContent>
-
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select score type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="CGPA">
+                              <div className="flex items-center gap-2">
+                                <CircleDot className="w-4 h-4" />
+                                CGPA
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="Percentage">
+                              <div className="flex items-center gap-2">
+                                <PercentCircle className="w-4 h-4" />
+                                Percentage
+                              </div>
+                            </SelectItem>
+                            <SelectItem value="Grade">
+                              <div className="flex items-center gap-2">
+                                <BadgeCheck className="w-4 h-4" />
+                                Grade
+                              </div>
+                            </SelectItem>
+                          </SelectContent>
                         </Select>
-                        </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="score"
-                        render={({ field }) => (
-                        <FormItem className="w-full">
-                            <FormLabel>Score</FormLabel>
-                            <FormControl>
-                            <Input
-                                placeholder="8.12"
-                                {...field}
-                                disabled={isPending}
-                            />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                        )}
-                    />
+                  />
                 </div>
                 <FormField
                   control={form.control}
@@ -420,4 +441,4 @@ export const EducationForm = ({ initialData }: { initialData?: IEducation }) => 
           </CardWrapper>
         </motion.div>
     );
-}
+};
