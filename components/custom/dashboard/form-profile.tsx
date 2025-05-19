@@ -13,6 +13,10 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "../auth/form-error";
 import { useRouter } from "next/navigation";
 
+/**
+ * Schema for profile update form validation
+ * Defines validation rules for all profile fields
+ */
 const UpdateSchema = z.object({
     name: z.string().min(1, "Name is required"),
     email: z.string().email("Invalid email address"),
@@ -27,12 +31,26 @@ const UpdateSchema = z.object({
 
 type UpdateFormData = z.infer<typeof UpdateSchema>;
 
+/**
+ * UpdateProfileForm Component
+ * 
+ * Form component for updating user profile information
+ * Features:
+ * - Form validation using Zod schema
+ * - Real-time field validation
+ * - Error and success message handling
+ * - Automatic data fetching on component mount
+ * - Animated form transitions
+ * 
+ * @returns {JSX.Element} The profile update form
+ */
 export const UpdateProfileForm = () => {
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [isPending, startTransition] = useTransition();
     const router = useRouter(); 
 
+    // Initialize form with validation and default values
     const form = useForm<UpdateFormData>({
         resolver: zodResolver(UpdateSchema),
         defaultValues: {
@@ -48,6 +66,10 @@ export const UpdateProfileForm = () => {
         }
     });
 
+    /**
+     * Effect hook to fetch user profile data
+     * Populates form fields with existing user data
+     */
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -76,6 +98,11 @@ export const UpdateProfileForm = () => {
         fetchUser();
     }, [form]);
 
+    /**
+     * Form submission handler
+     * Sends updated profile data to the server
+     * Handles success and error states
+     */
     const onSubmit = (data: UpdateFormData) => {
         setError("");
         setSuccess("");
@@ -113,6 +140,7 @@ export const UpdateProfileForm = () => {
             >
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                        {/* Name field */}
                         <FormField 
                             control={form.control}
                             name="name"
@@ -126,6 +154,7 @@ export const UpdateProfileForm = () => {
                                 </FormItem>
                             )}
                         />
+                        {/* Email field */}
                         <FormField
                             control={form.control}
                             name="email"
@@ -139,6 +168,7 @@ export const UpdateProfileForm = () => {
                                 </FormItem>
                             )}
                         />
+                        {/* Profile picture URL field */}
                         <FormField
                             control={form.control}
                             name="profilePicture"
@@ -152,6 +182,7 @@ export const UpdateProfileForm = () => {
                                 </FormItem>
                             )}
                         />
+                        {/* Resume link field */}
                         <FormField
                             control={form.control}
                             name="resumeLink"
@@ -165,6 +196,7 @@ export const UpdateProfileForm = () => {
                                 </FormItem>
                             )}
                         />
+                        {/* Social media links - first row */}
                         <div className="grid grid-cols-2 gap-4">
                             <FormField
                                 control={form.control}
@@ -203,6 +235,7 @@ export const UpdateProfileForm = () => {
                                 )}
                             />
                         </div>
+                        {/* Social media links - second row */}
                         <div className="grid grid-cols-2 gap-4">
                             <FormField
                                 control={form.control}
@@ -241,6 +274,7 @@ export const UpdateProfileForm = () => {
                                 )}
                             />
                         </div>
+                        {/* Bio field */}
                         <FormField
                             control={form.control}
                             name="bio"
@@ -260,10 +294,9 @@ export const UpdateProfileForm = () => {
                         <Button
                             type="submit"
                             className="w-full"
-                            size="lg"
                             disabled={isPending}
                         >
-                            Update
+                            Update Profile
                         </Button>
                     </form>
                 </Form>

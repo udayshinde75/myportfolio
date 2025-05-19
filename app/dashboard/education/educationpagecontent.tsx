@@ -1,3 +1,15 @@
+/**
+ * Education Page Content Component
+ * 
+ * Component for managing education entries
+ * Features:
+ * - Handles both create and edit modes
+ * - Fetches education data for editing
+ * - Loading state management
+ * - Responsive layout
+ * 
+ * @returns {JSX.Element} The education form with appropriate data
+ */
 "use client"
 import { EducationForm } from "@/components/custom/dashboard/education-form";
 import { useSearchParams } from "next/navigation";
@@ -8,6 +20,8 @@ export default function EducationPageContent() {
   const [loading, setLoading] = useState(true)
   const educationId = searchParams.get('id');
   console.log("education ID:", educationId)
+
+  // Initialize education state with default values
   const[education, setEducation] = useState({
     _id:"",
     title: "",
@@ -24,6 +38,10 @@ export default function EducationPageContent() {
     scoreType: "",
   });
 
+  /**
+   * Effect hook to fetch education data when in edit mode
+   * Handles loading states and error cases
+   */
   useEffect(() => {
     if (!educationId) {
       setLoading(false)
@@ -55,7 +73,6 @@ export default function EducationPageContent() {
                 score:data.score,
                 scoreType: data.scoreType,
             })
-          //console.log("Education:"+education)
         } else {
           setLoading(false)
           return
@@ -70,6 +87,7 @@ export default function EducationPageContent() {
     fetchJob();
   }, [educationId]);
 
+  // Show loading state while fetching education data
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">

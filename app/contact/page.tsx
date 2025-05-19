@@ -5,6 +5,10 @@ import { motion } from "framer-motion";
 import { Mail, Instagram, Linkedin, Github} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+/**
+ * X (Twitter) icon SVG component
+ * Custom SVG icon for X social media platform
+ */
 const XIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -17,6 +21,10 @@ const XIcon = (
   </svg>
 );
 
+/**
+ * Map of social media icons
+ * Maps platform names to their corresponding icon components
+ */
 const ICONS_MAP: Record<string, JSX.Element> = {
   email: <Mail size={28} />,
   twitter: XIcon,
@@ -25,12 +33,27 @@ const ICONS_MAP: Record<string, JSX.Element> = {
   github: <Github size={28} />,
 };
 
+/**
+ * ContactPage Component
+ * 
+ * Renders the contact page with animated social media links and contact information.
+ * Features:
+ * - Dynamic loading of contact information
+ * - Animated UI elements
+ * - Interactive social media cards with hover effects
+ * - Responsive design
+ * 
+ * @returns {JSX.Element} The contact page layout
+ */
 export default function ContactPage() {
   const [loading, setLoading] = useState(true);
   const [contactData, setContactData] = useState<{ type: string; link: string }[]>([]);
 
+  /**
+   * Effect hook to fetch user contact information
+   * Retrieves and formats social media links and contact details
+   */
   useEffect(() => {
-
     const fetchUser = async () => {
       try {
         const res = await fetch("/api/home/profile");
@@ -39,6 +62,7 @@ export default function ContactPage() {
         if (res.ok) {
           const links: { type: string; link: string }[] = [];
 
+          // Add available contact methods to the links array
           if (data.email) links.push({ type: "email", link: `mailto:${data.email}` });
           if (data.twitter) links.push({ type: "twitter", link: data.twitter });
           if (data.instagram) links.push({ type: "instagram", link: data.instagram });
@@ -59,6 +83,7 @@ export default function ContactPage() {
     fetchUser();
   }, []);
 
+  // Show loading state while fetching contact data
   if (loading) {
     return (
       <section className="w-full min-h-screen flex items-center justify-center">
@@ -69,6 +94,7 @@ export default function ContactPage() {
 
   return (
     <div className="mt-20 flex flex-col items-center justify-center p-4">
+      {/* Animated page title */}
       <motion.h1
         className="text-4xl font-bold mb-2"
         initial={{ opacity: 0, y: -20 }}
@@ -77,6 +103,7 @@ export default function ContactPage() {
       >
         Contact Me
       </motion.h1>
+      {/* Animated description */}
       <motion.p
         className="text-gray-600 dark:text-gray-400 mb-8 text-center max-w-md"
         initial={{ opacity: 0 }}
@@ -86,21 +113,38 @@ export default function ContactPage() {
         Have a question or want to work together? Connect through any platform!
       </motion.p>
 
+      {/* Contact cards container */}
       <div className="flex flex-col gap-y-5 items-center">
         {contactData.map((item, index) => (
           <GlowCard key={`${item.type}-${index}`} item={item} index={index} />
         ))}
       </div>
-      
     </div>
   );
 }
 
-// ✨ GlowCard component with cursor glow + 30/70 layout
+/**
+ * GlowCard Component
+ * 
+ * Renders an interactive contact card with hover effects and cursor glow.
+ * Features:
+ * - Mouse position tracking for glow effect
+ * - Animated entrance
+ * - Responsive layout with icon and text sections
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.item - Contact item data containing type and link
+ * @param {number} props.index - Index for animation delay
+ * @returns {JSX.Element} The contact card component
+ */
 function GlowCard({ item, index }: { item: { type: string; link: string }; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
+  /**
+   * Handles mouse movement over the card
+   * Updates the glow effect position based on cursor coordinates
+   */
   function handleMouseMove(e: React.MouseEvent) {
     const rect = cardRef.current?.getBoundingClientRect();
     if (rect) {
@@ -128,6 +172,7 @@ function GlowCard({ item, index }: { item: { type: string; link: string }; index
           onMouseMove={handleMouseMove}
           className="relative w-60 rounded-2xl p-[2px] transition-all duration-300"
         >
+          {/* Glow effect overlay */}
           <div
             className="absolute inset-0 rounded-2xl pointer-events-none"
             style={{
@@ -135,17 +180,18 @@ function GlowCard({ item, index }: { item: { type: string; link: string }; index
             }}
           ></div>
 
+          {/* Card content */}
           <Card
             className="relative z-10 backdrop-blur-md bg-white/30 dark:bg-gray-300/20 
             border border-stone-200 dark:border-stone-700 hover:scale-[1.1] transition-all duration-300"
           >
             <CardContent className="flex w-full p-5">
-              {/* Icon Section */}
+              {/* Icon section */}
               <div className="w-[40%] flex items-center justify-center text-blue-600 dark:text-blue-400">
                 {ICONS_MAP[item.type]}
               </div>
 
-              {/* Text Section */}
+              {/* Text section */}
               <div className="w-[60%] flex items-center text-lg font-medium capitalize text-gray-900 dark:text-gray-200">
                 {item.type}
               </div>

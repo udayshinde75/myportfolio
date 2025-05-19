@@ -1,3 +1,17 @@
+/**
+ * SkillTags Component
+ * 
+ * A reusable component that displays a list of skills as animated badges
+ * Features:
+ * - Animated appearance using Framer Motion
+ * - Responsive layout with flex wrapping
+ * - Handles empty skill arrays
+ * - Consistent styling with secondary badge variant
+ * 
+ * @param {Object} props - Component props
+ * @param {string[]} props.skills - Array of skill strings to display
+ * @returns {JSX.Element | null} The skill tags layout or null if no valid skills
+ */
 import { Badge } from "@/components/ui/badge";
 import { motion } from "framer-motion";
 
@@ -6,6 +20,7 @@ interface SkillTagsProps {
 }
 
 export default function SkillTags({ skills }: SkillTagsProps) {
+  // Return null if there's only one empty skill
   if (skills.length === 1 && skills[0].trim() == "") {
     return null;
   }

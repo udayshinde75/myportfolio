@@ -1,6 +1,32 @@
+/**
+ * Line Components
+ * 
+ * A collection of animated line components for visual separation
+ * Features:
+ * - Animated horizontal and vertical lines
+ * - Infinite animation using Framer Motion
+ * - Responsive sizing
+ * - Customizable styling
+ * - Repeating gradient patterns
+ * 
+ * @returns {Object} Object containing Line and VerticalLine components
+ */
+
 "use client";
 import { motion } from "framer-motion";
 
+/**
+ * Horizontal Line Component
+ * 
+ * Creates an animated horizontal line with a repeating pattern
+ * Features:
+ * - Animated background position
+ * - Repeating gradient pattern
+ * - Responsive width
+ * - Infinite animation
+ * 
+ * @returns {JSX.Element} The horizontal line layout
+ */
 function Line() {
   return (
     <motion.div
@@ -21,7 +47,19 @@ function Line() {
   );
 }
 
-
+/**
+ * Vertical Line Component
+ * 
+ * Creates an animated vertical line with a repeating pattern
+ * Features:
+ * - Animated background position
+ * - Repeating gradient pattern
+ * - Responsive height
+ * - Infinite animation
+ * - Mobile-first design
+ * 
+ * @returns {JSX.Element} The vertical line layout
+ */
 function VerticalLine() {
   return (
     <motion.div
@@ -41,6 +79,5 @@ function VerticalLine() {
     />
   );
 }
-
 
 export { Line, VerticalLine };

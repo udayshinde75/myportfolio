@@ -24,6 +24,15 @@ import { FormError } from "../auth/form-error";
 import { FormSuccess } from "../auth/form-success";
 import { useRouter } from "next/navigation";
 
+/**
+ * Schema for project form validation
+ * Defines validation rules for all project-related fields including:
+ * - Project name (1-25 characters)
+ * - Project description (85-100 characters)
+ * - Skills (comma-separated list)
+ * - Optional GitHub and live demo links
+ * - Required readme file and project picture URLs
+ */
 const ProjectSchema = z.object({
   projectName: z.string().min(1, "Project Title is required!").max(25),
   projectDescription: z.string().min(85, "project Description is required!").max(100),
@@ -36,6 +45,10 @@ const ProjectSchema = z.object({
 
 type ProjectFormValues = z.infer<typeof ProjectSchema>;
 
+/**
+ * Interface defining the structure of a project entry
+ * Used for both creating new projects and editing existing ones
+ */
 interface ProjectType {
     _id: string;
     projectName: string;
@@ -47,6 +60,22 @@ interface ProjectType {
     projectPictureUrl: string;
 }
 
+/**
+ * ProjectForm Component
+ * 
+ * Form component for adding or editing project entries
+ * Features:
+ * - Form validation using Zod schema
+ * - Support for both create and edit modes
+ * - Real-time field validation
+ * - Toast notifications for success/error states
+ * - Animated form transitions
+ * - Skills management with comma-separated input
+ * 
+ * @param {Object} props - Component props
+ * @param {ProjectType} props.initialData - Optional initial data for edit mode
+ * @returns {JSX.Element} The project form
+ */
 export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
   const router = useRouter();
   const isEditMode = !!initialData?._id;
@@ -56,6 +85,7 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
   const [success, setSuccess] = useState("");
   const [isPending, startTransition] = useTransition();
 
+  // Initialize form with validation and default values
   const form = useForm<ProjectFormValues>({
     resolver: zodResolver(ProjectSchema),
     defaultValues: {
@@ -71,6 +101,12 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
     },
   });
 
+  /**
+   * Form submission handler
+   * Processes form data and sends to appropriate API endpoint
+   * Handles both create and update operations
+   * Converts comma-separated skills string to array before submission
+   */
   const onSubmit = (values: ProjectFormValues) => {
     setError("");
     setSuccess("");
@@ -109,6 +145,7 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
         });
     });
   };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -123,6 +160,7 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
       >
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Project title field */}
             <FormField
               control={form.control}
               name="projectName"
@@ -141,6 +179,7 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
               )}
             />
 
+            {/* Project description field */}
             <FormField
               control={form.control}
               name="projectDescription"
@@ -158,6 +197,8 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
                 </FormItem>
               )}
             />
+
+            {/* GitHub and live demo links in a 2-column grid */}
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -196,6 +237,8 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
                 )}
               />
             </div>
+
+            {/* Readme file and project screenshot in a 2-column grid */}
             <div className="grid grid-cols-2 gap-4">
               <FormField
                 control={form.control}
@@ -232,6 +275,8 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
                 )}
               />
             </div>
+
+            {/* Skills field - comma-separated list */}
             <FormField
               control={form.control}
               name="skills"
@@ -250,15 +295,17 @@ export const ProjectForm = ({ initialData }: { initialData?: ProjectType }) => {
               )}
             />
 
+            {/* Error and success messages */}
             <FormError message={error} />
             <FormSuccess message={success} />
 
+            {/* Form submission button */}
             <Button type="submit" className="w-full" disabled={isPending}>
-              {isEditMode ? "Update Project" : "Add Project"}
+              {isEditMode ? "Update Project Details" : "Add Project Details"}
             </Button>
           </form>
         </Form>
       </CardWrapper>
     </motion.div>
   );
-};
+}

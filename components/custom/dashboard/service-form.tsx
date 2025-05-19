@@ -23,6 +23,11 @@ import { CardWrapper } from "@/components/custom/auth/card-wrapper";
 import { FormError } from "../auth/form-error";
 import { FormSuccess } from "../auth/form-success";
 import { useRouter } from "next/navigation";
+
+/**
+ * Schema for service form validation
+ * Defines validation rules for all service-related fields
+ */
 const ServiceSchema = z.object({
     title: z.string().min(3),
     InfoForRecruiters: z.string().min(100),
@@ -30,6 +35,10 @@ const ServiceSchema = z.object({
     Experience: z.string().min(100),
 })
 
+/**
+ * Interface defining the structure of a service entry
+ * Used for both creating new services and editing existing ones
+ */
 interface IService {
     _id: string,
     title: string,
@@ -38,9 +47,23 @@ interface IService {
     Experience: string,
 }
 
-
 type ServiceFormValues = z.infer<typeof ServiceSchema>;
 
+/**
+ * ServiceForm Component
+ * 
+ * Form component for adding or editing service entries
+ * Features:
+ * - Form validation using Zod schema
+ * - Support for both create and edit modes
+ * - Real-time field validation
+ * - Toast notifications for success/error states
+ * - Animated form transitions
+ * 
+ * @param {Object} props - Component props
+ * @param {IService} props.initialData - Optional initial data for edit mode
+ * @returns {JSX.Element} The service form
+ */
 export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
     const router = useRouter();
     const isEditMode = !!initialData?._id;
@@ -50,6 +73,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
     const [success, setSuccess] = useState("");
     const [isPending, startTransition] = useTransition();
 
+    // Initialize form with validation and default values
     const form = useForm<ServiceFormValues>({
         resolver: zodResolver(ServiceSchema),
         defaultValues: {
@@ -60,6 +84,11 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
         },
     });
 
+    /**
+     * Form submission handler
+     * Processes form data and sends to appropriate API endpoint
+     * Handles both create and update operations
+     */
     const onSubmit = (values: ServiceFormValues) => {
         setError("");
         setSuccess("");
@@ -112,6 +141,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
           >
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                {/* Service title field */}
                 <FormField
                   control={form.control}
                   name="title"
@@ -129,6 +159,8 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                     </FormItem>
                   )}
                 />
+
+                {/* Information for recruiters field */}
                 <FormField
                   control={form.control}
                   name="InfoForRecruiters"
@@ -137,7 +169,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                       <FormLabel>Info For Recruiters</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="What did you do?"
+                          placeholder="Describe your service for recruiters..."
                           {...field}
                           disabled={isPending}
                         />
@@ -146,6 +178,8 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                     </FormItem>
                   )}
                 />
+
+                {/* Information for clients field */}
                 <FormField
                   control={form.control}
                   name="InfoForClients"
@@ -154,7 +188,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                       <FormLabel>Information for Clients</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="What did you do?"
+                          placeholder="Describe your service for clients..."
                           {...field}
                           disabled={isPending}
                         />
@@ -163,6 +197,8 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                     </FormItem>
                   )}
                 />
+
+                {/* Experience field */}
                 <FormField
                   control={form.control}
                   name="Experience"
@@ -171,7 +207,7 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                       <FormLabel>Experience</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="What did you do?"
+                          placeholder="Describe your relevant experience..."
                           {...field}
                           disabled={isPending}
                         />
@@ -181,9 +217,11 @@ export const ServiceForm = ({ initialData }: { initialData?: IService }) => {
                   )}
                 />
     
+                {/* Error and success messages */}
                 <FormError message={error} />
                 <FormSuccess message={success} />
     
+                {/* Form submission button */}
                 <Button type="submit" className="w-full" disabled={isPending}>
                   {isEditMode ? "Update Service Details" : "Add Service Details"}
                 </Button>

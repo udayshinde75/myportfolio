@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uday Shinde's Portfolio Website
 
-## Getting Started
+A modern, responsive portfolio website built with Next.js 15, TypeScript, and Tailwind CSS. This portfolio showcases professional work, skills, and contact information with a beautiful and interactive user interface.
 
-First, run the development server:
+## 🚀 Features
 
+- **Modern Tech Stack**
+  - Next.js 15 with App Router
+  - TypeScript for type safety
+  - Tailwind CSS for styling
+  - Framer Motion for animations
+  - Three.js for 3D graphics
+
+- **Responsive Design**
+  - Mobile-first approach
+  - Adaptive layouts for all devices
+  - Custom navigation for mobile and desktop
+  - Smooth animations and transitions
+
+- **Theme Support**
+  - Light/Dark mode
+  - Theme persistence
+  - Cross-tab synchronization
+  - Backdrop blur effects
+
+- **Authentication**
+  - NextAuth.js integration
+  - JWT-based authentication
+  - Secure password handling with bcrypt
+  - Protected routes
+
+- **Interactive Components**
+  - Animated navigation
+  - 3D graphics with Three.js
+  - Type animations
+  - Markdown support
+  - Custom UI components with Radix UI
+
+## 🛠️ Tech Stack
+
+### Frontend
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Three.js
+- Radix UI Components
+
+### Backend
+- Next.js API Routes
+- MongoDB with Mongoose
+- NextAuth.js
+- JWT Authentication
+
+### Development Tools
+- ESLint
+- PostCSS
+- Turbopack
+- TypeScript
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/portfolio.git
+cd portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up environment variables:
+Create a `.env.local` file in the root directory and add the following variables:
+```env
+MONGODB_URI=your_mongodb_uri
+NEXTAUTH_SECRET=your_nextauth_secret
+NEXTAUTH_URL=http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Run the development server:
+```bash
+npm run dev
+```
 
-## Learn More
+## 🏗️ Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+portfolio/
+├── app/                 # Next.js app directory
+├── components/          # React components
+│   ├── custom/         # Custom components
+│   └── ui/            # Reusable UI components
+├── lib/                # Utility functions and configurations
+├── models/             # MongoDB models
+├── public/             # Static assets
+├── schemas/            # Zod validation schemas
+├── styles/             # Global styles
+└── utils/              # Helper functions
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Available Scripts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `npm run dev` - Start development server with Turbopack
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-## Deploy on Vercel
+## 🔒 Security Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- JWT-based authentication
+- Secure password hashing with bcrypt
+- Protected API routes
+- Environment variable protection
+- CORS configuration
+- Rate limiting
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🎨 UI Components
+
+The project uses a combination of custom components and Radix UI primitives:
+
+- Navigation bar with mobile/desktop layouts
+- Theme toggle
+- Responsive layouts
+- Custom animations
+- 3D graphics integration
+- Form components
+- Modal dialogs
+- Accordion components
+- Tabs
+
+## 📱 Responsive Design
+
+The website is fully responsive with:
+- Mobile-first approach
+- Custom navigation for mobile devices
+- Adaptive layouts
+- Touch-friendly interactions
+- Optimized images and assets
+
+## 🔄 State Management
+
+- React Context for theme management
+- Next.js built-in state management
+- Form state with React Hook Form
+- Authentication state with NextAuth.js
+
+## 🚀 Performance Optimizations
+
+- Image optimization
+- Code splitting
+- Lazy loading
+- Turbopack for faster development
+- Optimized builds
+- Caching strategies
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 👥 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Contact
+
+For any questions or concerns, please reach out through the contact form on the website or create an issue in the repository.
