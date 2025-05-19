@@ -51,14 +51,14 @@ export default function ProjectCard({
             GitHub
             </Badge>
         </Link>
-        {liveDemo?? (
+        {liveDemo && liveDemo.trim() !== "" && (
           <Link href={liveDemo} target="_blank" rel="noopener noreferrer">
             <Badge variant="secondary" className="text-xs cursor-pointer">
-            Live Demo
+              Live Demo
             </Badge>
-        </Link>
+          </Link>
         )}
-        <Link href={`/projects/${_id}`} target="_blank" rel="noopener noreferrer">
+        <Link href={`/projects/${_id}`} rel="noopener noreferrer">
             <Badge variant="secondary" className="text-xs cursor-pointer">
             Project Info
             </Badge>
