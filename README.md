@@ -57,3 +57,27 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 - Turbopack
 - TypeScript
 
+## 📸 Screenshots
+
+### Home Page
+![Home Page](/public/assets/screenshots/home.png)
+
+### Projects Section
+![Projects Section](/public/assets/screenshots/projects.png)
+
+### About Section
+![Projects Section](/public/assets/screenshots/about.png)
+
+### Services Section
+![Projects Section](/public/assets/screenshots/services.png)
+
+### Contact Section
+![Projects Section](/public/assets/screenshots/contact.png)
+
+### Dashboard Section
+![Projects Section](/public/assets/screenshots/dashboard.png)
+
+
+
+> Note: To add your own screenshots, place them in the `/public/assets/screenshots/` directory and update the paths above.
+
