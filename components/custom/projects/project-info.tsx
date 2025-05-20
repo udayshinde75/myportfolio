@@ -88,7 +88,7 @@ export default function ProjectInfo({ id }: { id: string }) {
     }
 
     return (
-        <Card className="w-full max-w-4xl mx-auto p-4 space-y-6 rounded-2xl transition-transform shadow-xl mt-12 backdrop-blur-3xl bg-opacity-40">
+        <Card className="w-full max-w-4xl mx-auto p-4 space-y-6 m-4 rounded-2xl transition-transform shadow-xl mt-12 backdrop-blur-3xl bg-opacity-40">
             <CardContent>
                 {/* Project Title and Description */}
                 <h1 className="text-3xl font-bold mb-2">{project.projectName}</h1>
