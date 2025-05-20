@@ -63,19 +63,19 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 ![Home Page](http://udayshinde.in/assets/screenshots/home.png)
 
 ### Projects Section
-![Projects Section](/public/assets/screenshots/projects.png)
+![Projects Section](http://udayshinde.in/assets/screenshots/projects.png)
 
 ### About Section
-![Projects Section](/public/assets/screenshots/about.png)
+![About Section](http://udayshinde.in/assets/screenshots/about.png)
 
 ### Services Section
-![Projects Section](/public/assets/screenshots/services.png)
+![Services Section](http://udayshinde.in/assets/screenshots/services.png)
 
 ### Contact Section
-![Projects Section](/public/assets/screenshots/contact.png)
+![Contact Section](http://udayshinde.in/assets/screenshots/contact.png)
 
 ### Dashboard Section
-![Projects Section](/public/assets/screenshots/dashboard.png)
+![Dashboard Section](http://udayshinde.in/assets/screenshots/dashboard.png)
 
 
 
