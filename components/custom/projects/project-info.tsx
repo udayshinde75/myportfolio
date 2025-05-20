@@ -106,7 +106,7 @@ export default function ProjectInfo({ id }: { id: string }) {
                 {/* Project Links */}
                 <div className="flex gap-4 mb-6">
                     <Link href={project.githubLink} target="_blank">
-                        <Badge className="hover:!bg-gray-500 cursor-pointer">GitHub</Badge>
+                        <Badge variant="secondary" className="text-xs cursor-pointer">GitHub</Badge>
                     </Link>
                     {project.liveDemo && (
                         <Link href={project.liveDemo} target="_blank" rel="noopener noreferrer">
