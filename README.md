@@ -60,7 +60,7 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 ## 📸 Screenshots
 
 ### Home Page
-![Home Page](/assets/screenshots/home.png)
+![Home Page](http://udayshinde.in/assets/screenshots/home.png)
 
 ### Projects Section
 ![Projects Section](/public/assets/screenshots/projects.png)
