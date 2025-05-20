@@ -77,7 +77,7 @@ export default function ProjectCard({
                 
                 {/* Skills Badges */}
                 <div className="flex flex-wrap gap-2 mb-3">
-                    {skills.map((skill, index) => (
+                    {skills.slice(0, 3).map((skill, index) => (
                         <Badge variant="secondary" className="text-xs" key={index}>
                             {skill}
                         </Badge>
