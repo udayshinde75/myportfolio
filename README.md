@@ -23,7 +23,6 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
   - Backdrop blur effects
 
 - **Authentication**
-  - NextAuth.js integration
   - JWT-based authentication
   - Secure password handling with bcrypt
   - Protected routes
@@ -48,7 +47,6 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 ### Backend
 - Next.js API Routes
 - MongoDB with Mongoose
-- NextAuth.js
 - JWT Authentication
 
 ### Development Tools
