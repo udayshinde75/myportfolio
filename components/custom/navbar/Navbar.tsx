@@ -60,7 +60,7 @@ export default function Navbar() {
                 <div className="container mx-auto flex items-center justify-between w-full p-4 gap-x-6">
                     {/* Logo/Brand */}
                     <Link href={`/`} className="text-lg font-bold text-gray-900 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-300 transition-colors duration-1000">
-                        I'm Dev
+                        I&apos;m Dev
                     </Link>
 
           {/* Desktop Navigation Menu */}
