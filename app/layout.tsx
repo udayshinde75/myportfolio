@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   },
   // Main description for search engines and social sharing
   description: "Welcome to my portfolio website. Explore my projects, skills, and experience in software development.",
+  // Favicon configuration
+  icons: {
+    icon: '/assets/images/myprofile.png',
+    shortcut: '/assets/images/myprofile.png',
+    apple: '/assets/images/myprofile.png',
+  },
   // Keywords for SEO optimization
   keywords: [
     "Uday Shinde",
