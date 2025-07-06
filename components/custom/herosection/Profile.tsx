@@ -125,7 +125,7 @@ export default function Profile({
                                 className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl"
                             >
                                 <Image
-                                    src={user.profilePicture}
+                                    src="/assets/images/myprofile.png"
                                     alt={`${user.name}'s Profile Picture`}
                                     fill
                                     className="object-cover"
