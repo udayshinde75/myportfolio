@@ -29,7 +29,6 @@ A modern, responsive portfolio website built with Next.js 15, TypeScript, and Ta
 
 - **Interactive Components**
   - Animated navigation
-  - 3D graphics with Three.js
   - Type animations
   - Markdown support
   - Custom UI components with Radix UI
