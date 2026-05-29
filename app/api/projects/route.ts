@@ -14,7 +14,7 @@ export async function GET(_req: Request) {
         await connectToDB();
         
         // Fetch all projects for the portfolio owner
-        const projects = await Project.find({ user: process.env.NEXT_PUBLIC_OWNER });
+        const projects = await Project.find({ user: process.env.NEXT_PUBLIC_OWNER }).sort({ createdAt: -1 });
         
         // Return projects data as JSON response
         return NextResponse.json(projects);
