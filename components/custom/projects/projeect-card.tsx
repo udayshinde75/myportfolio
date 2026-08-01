@@ -22,6 +22,7 @@
  */
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import TiltCard from "@/components/custom/3d/TiltCard";
 import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
@@ -58,61 +59,63 @@ export default function ProjectCard({
     liveDemo,
 }: ProjectCardProps) {
     return (
-        <Card className="w-full max-w-xs rounded-2xl transition-transform hover:scale-105 shadow-xl border-stone-600 mt-10 backdrop-blur-3xl bg-opacity-40">
-            {/* Project Image */}
-            <Image
-                src={projectPictureUrl}
-                alt={projectName}
-                width={400}
-                height={250}
-                className="rounded-t-2xl object-cover"
-                priority // Prioritize loading of project images
-            />
-            <CardContent className="p-4">
-                {/* Project Title */}
-                <h2 className="text-xl font-semibold mb-2">{projectName}</h2>
-                
-                {/* Project Description */}
-                <p className="text-sm text-muted-foreground mb-4">{projectDescription}</p>
-                
-                {/* Skills Badges */}
-                <div className="flex flex-wrap gap-2 mb-3">
-                    {skills.slice(0, 3).map((skill, index) => (
-                        <Badge variant="secondary" className="text-xs" key={index}>
-                            {skill}
-                        </Badge>
-                    ))}
-                </div>
-                
-                {/* Divider */}
-                <hr className="border-gray-500 mb-3" />
+        <TiltCard maxTilt={8} className="w-full max-w-xs rounded-2xl mt-10">
+            <Card className="rounded-2xl shadow-xl border-stone-600 backdrop-blur-3xl bg-opacity-40">
+                {/* Project Image */}
+                <Image
+                    src={projectPictureUrl}
+                    alt={projectName}
+                    width={400}
+                    height={250}
+                    className="rounded-t-2xl object-cover"
+                    priority // Prioritize loading of project images
+                />
+                <CardContent className="p-4">
+                    {/* Project Title */}
+                    <h2 className="text-xl font-semibold mb-2">{projectName}</h2>
 
-                {/* Project Links */}
-                <div className="flex gap-3">
-                    {/* GitHub Link */}
-                    <Link href={githubLink} rel="noopener noreferrer">
-                        <Badge variant="secondary" className="text-xs cursor-pointer">
-                            GitHub
-                        </Badge>
-                    </Link>
-                    
-                    {/* Live Demo Link (if available) */}
-                    {liveDemo && liveDemo.trim() !== "" && (
-                        <Link href={liveDemo} target="_blank" rel="noopener noreferrer">
+                    {/* Project Description */}
+                    <p className="text-sm text-muted-foreground mb-4">{projectDescription}</p>
+
+                    {/* Skills Badges */}
+                    <div className="flex flex-wrap gap-2 mb-3">
+                        {skills.slice(0, 3).map((skill, index) => (
+                            <Badge variant="secondary" className="text-xs" key={index}>
+                                {skill}
+                            </Badge>
+                        ))}
+                    </div>
+
+                    {/* Divider */}
+                    <hr className="border-gray-500 mb-3" />
+
+                    {/* Project Links */}
+                    <div className="flex gap-3">
+                        {/* GitHub Link */}
+                        <Link href={githubLink} rel="noopener noreferrer">
                             <Badge variant="secondary" className="text-xs cursor-pointer">
-                                Live Demo
+                                GitHub
                             </Badge>
                         </Link>
-                    )}
-                    
-                    {/* Project Details Link */}
-                    <Link href={`/projects/${_id}`} rel="noopener noreferrer">
-                        <Badge variant="secondary" className="text-xs cursor-pointer">
-                            Project Info
-                        </Badge>
-                    </Link>
-                </div>
-            </CardContent>
-        </Card>
+
+                        {/* Live Demo Link (if available) */}
+                        {liveDemo && liveDemo.trim() !== "" && (
+                            <Link href={liveDemo} target="_blank" rel="noopener noreferrer">
+                                <Badge variant="secondary" className="text-xs cursor-pointer">
+                                    Live Demo
+                                </Badge>
+                            </Link>
+                        )}
+
+                        {/* Project Details Link */}
+                        <Link href={`/projects/${_id}`} rel="noopener noreferrer">
+                            <Badge variant="secondary" className="text-xs cursor-pointer">
+                                Project Info
+                            </Badge>
+                        </Link>
+                    </div>
+                </CardContent>
+            </Card>
+        </TiltCard>
     );
 }

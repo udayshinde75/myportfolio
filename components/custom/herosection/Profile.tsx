@@ -25,6 +25,8 @@ import { TypeAnimation } from "react-type-animation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import ProfileActions from "./ProfileActions";
+import HeroOrb from "@/components/custom/3d/HeroOrb";
+import TiltCard from "@/components/custom/3d/TiltCard";
 import { Metadata } from "next";
 
 // SEO metadata for the profile section
@@ -118,20 +120,28 @@ export default function Profile({
                 {showProfilePicture && (
                     <>
                         {user.profilePicture && (
-                            <motion.div
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                transition={{ duration: 0.5 }}
-                                className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full overflow-hidden shadow-xl"
-                            >
-                                <Image
-                                    src="/assets/images/myprofile.png"
-                                    alt={`${user.name}'s Profile Picture`}
-                                    fill
-                                    className="object-cover"
-                                    priority // Prioritize loading of profile image
-                                />
-                            </motion.div>
+                            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96">
+                                {/* Floating distorted 3D orb accent behind the photo */}
+                                <div className="absolute inset-[-25%]">
+                                    <HeroOrb />
+                                </div>
+                                <TiltCard maxTilt={12} className="w-full h-full rounded-full">
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.8 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.5 }}
+                                        className="relative w-full h-full rounded-full overflow-hidden shadow-2xl border border-white/20 dark:border-white/10"
+                                    >
+                                        <Image
+                                            src="/assets/images/myprofile.png"
+                                            alt={`${user.name}'s Profile Picture`}
+                                            fill
+                                            className="object-cover"
+                                            priority // Prioritize loading of profile image
+                                        />
+                                    </motion.div>
+                                </TiltCard>
+                            </div>
                         )}
                     </>
                 )}

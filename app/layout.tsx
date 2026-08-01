@@ -1,4 +1,5 @@
 import Navbar from "@/components/custom/navbar/Navbar";
+import Scene3DBackground from "@/components/custom/3d/Scene3DBackground";
 import "@/styles/globals.css";
 import { Toaster } from 'sonner';
 import { ReactNode } from "react";
@@ -100,8 +101,10 @@ export default function RootLayout({
     <html lang="en">
         <body
           // Main layout styling with dark mode support and gradient background
-          className="transition-colors duration-1000 flex h-full items-center justify-center flex-col relative bg-gradient-to-br from-gray-300 dark:from-gray-900 via-gray-300 dark:via-gray-900 to-gray-300 dark:to-gray-900 py-12 pb-32"
+          className="transition-colors duration-1000 flex h-full items-center justify-center flex-col relative bg-gradient-to-br from-gray-300/80 dark:from-gray-900/90 via-gray-300/80 dark:via-gray-900/90 to-gray-300/80 dark:to-gray-900/90 py-12 pb-32"
         >
+          {/* Persistent 3D WebGL background shared by every page */}
+          <Scene3DBackground />
           <Navbar/>
           {children}
           {/* Toast notifications component for user feedback */}

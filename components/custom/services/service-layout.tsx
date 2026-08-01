@@ -21,6 +21,7 @@ import { Metadata } from "next";
 import { motion } from "framer-motion";
 import Service from "./service";
 import { ServiceProps } from "./service";
+import TiltCard from "@/components/custom/3d/TiltCard";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -87,14 +88,19 @@ export default function ServiceLayout() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.2 }}
+            className="mb-8"
           >
-            <Service
-              key={service.title}
-              title={service.title}
-              Experience={service.Experience}
-              InfoForRecruiters={service.InfoForRecruiters}
-              InfoForClients={service.InfoForClients}
-            />
+            <TiltCard maxTilt={4} className="rounded-2xl">
+              <div className="rounded-2xl border border-gray-300 dark:border-gray-700 bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg shadow-xl p-6">
+                <Service
+                  key={service.title}
+                  title={service.title}
+                  Experience={service.Experience}
+                  InfoForRecruiters={service.InfoForRecruiters}
+                  InfoForClients={service.InfoForClients}
+                />
+              </div>
+            </TiltCard>
           </motion.div>
         ))
       )}

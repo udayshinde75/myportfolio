@@ -26,6 +26,7 @@ export default function NavItem({ href, icon, label }: { href: string; icon: Rea
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          whileHover={{ y: -3, scale: 1.15 }}
           transition={{ duration: 0.3 }}
           className="flex transition-colors duration-1000 flex-col items-center text-gray-900 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-300"
         >

@@ -23,7 +23,7 @@ export default function NavLink({ href, label, onClick }: { href: string; label:
     <Link 
       href={href} 
       onClick={onClick} 
-      className="text-lg font-medium text-gray-900 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-300 transition-colors duration-1000"
+      className="text-lg font-medium text-gray-900 hover:text-gray-500 dark:text-gray-100 dark:hover:text-gray-300 transition-all duration-300 inline-block hover:-translate-y-0.5"
     >
       {label}
     </Link>

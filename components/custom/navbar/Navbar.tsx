@@ -55,7 +55,7 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1 }}
-                className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[80%] shadow-xl border border-gray-500 rounded-3xl px-3 flex justify-between backdrop-blur-xl bg-opacity-80 z-50"
+                className="fixed top-2 transform -translate-x-1/2 w-[90%] md:w-[80%] shadow-3d border border-gray-500 rounded-3xl px-3 flex justify-between backdrop-blur-xl bg-opacity-80 z-50"
             >
                 <div className="container mx-auto flex items-center justify-between w-full p-4 gap-x-6">
                     {/* Logo/Brand */}
@@ -85,7 +85,7 @@ export default function Navbar() {
       </motion.nav>
 
             {/* Bottom Navigation Bar - Mobile Only */}
-            <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] border border-gray-500 shadow-lg rounded-3xl flex justify-around p-3 md:hidden backdrop-blur-xl bg-opacity-80 z-50">
+            <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-[90%] border border-gray-500 shadow-3d rounded-3xl flex justify-around p-3 md:hidden backdrop-blur-xl bg-opacity-80 z-50">
                 <NavItem href="/services" icon={<Briefcase />} label="Services"/>
                 <NavItem href="/about" icon={<Info />} label="About"/>
                 <NavItem href="/" icon={<Home />} label="Home" />

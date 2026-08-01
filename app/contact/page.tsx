@@ -4,6 +4,7 @@ import { JSX, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, Instagram, Linkedin, Github} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import TiltCard from "@/components/custom/3d/TiltCard";
 
 /**
  * X (Twitter) icon SVG component
@@ -167,37 +168,39 @@ function GlowCard({ item, index }: { item: { type: string; link: string }; index
         target={item.type === "email" ? "_self" : "_blank"}
         rel="noopener noreferrer"
       >
-        <div
-          ref={cardRef}
-          onMouseMove={handleMouseMove}
-          className="relative w-60 rounded-2xl p-[2px] transition-all duration-300"
-        >
-          {/* Glow effect overlay */}
+        <TiltCard maxTilt={10} glare={false} className="w-60 rounded-2xl">
           <div
-            className="absolute inset-0 rounded-2xl pointer-events-none"
-            style={{
-              background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59,130,246,0.3), transparent 80%)`,
-            }}
-          ></div>
-
-          {/* Card content */}
-          <Card
-            className="relative z-10 backdrop-blur-md bg-white/30 dark:bg-gray-300/20 
-            border border-stone-200 dark:border-stone-700 hover:scale-[1.1] transition-all duration-300"
+            ref={cardRef}
+            onMouseMove={handleMouseMove}
+            className="relative rounded-2xl p-[2px] transition-all duration-300"
           >
-            <CardContent className="flex w-full p-5">
-              {/* Icon section */}
-              <div className="w-[40%] flex items-center justify-center text-blue-600 dark:text-blue-400">
-                {ICONS_MAP[item.type]}
-              </div>
+            {/* Glow effect overlay */}
+            <div
+              className="absolute inset-0 rounded-2xl pointer-events-none"
+              style={{
+                background: `radial-gradient(600px circle at ${mousePos.x}px ${mousePos.y}px, rgba(59,130,246,0.3), transparent 80%)`,
+              }}
+            ></div>
 
-              {/* Text section */}
-              <div className="w-[60%] flex items-center text-lg font-medium capitalize text-gray-900 dark:text-gray-200">
-                {item.type}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+            {/* Card content */}
+            <Card
+              className="relative z-10 backdrop-blur-md bg-white/30 dark:bg-gray-300/20
+              border border-stone-200 dark:border-stone-700 transition-all duration-300"
+            >
+              <CardContent className="flex w-full p-5">
+                {/* Icon section */}
+                <div className="w-[40%] flex items-center justify-center text-blue-600 dark:text-blue-400">
+                  {ICONS_MAP[item.type]}
+                </div>
+
+                {/* Text section */}
+                <div className="w-[60%] flex items-center text-lg font-medium capitalize text-gray-900 dark:text-gray-200">
+                  {item.type}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </TiltCard>
       </a>
     </motion.div>
   );

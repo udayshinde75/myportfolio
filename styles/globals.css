@@ -249,3 +249,20 @@ body {
 .container-width {
   @apply w-[85%] max-w-[1000px]
 }
+
+/* Layered "floating" 3D shadow used on the navbar chrome */
+.shadow-3d {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 10px 15px -3px rgba(0, 0, 0, 0.2),
+    0 4px 6px -4px rgba(0, 0, 0, 0.2),
+    0 25px 35px -10px rgba(99, 102, 241, 0.25);
+}
+
+.dark .shadow-3d {
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 10px 15px -3px rgba(0, 0, 0, 0.5),
+    0 4px 6px -4px rgba(0, 0, 0, 0.5),
+    0 25px 35px -10px rgba(129, 140, 248, 0.35);
+}

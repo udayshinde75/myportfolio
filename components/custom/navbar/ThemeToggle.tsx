@@ -41,6 +41,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       initial={{ scale: 0.5 }}
       animate={{ scale: 1.1 }}
+      whileHover={{ scale: 1.3, rotate: 10 }}
       whileTap={{ scale: 0.5 }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className="p-2 bg-none dark:text-gray-200 text-gray-900 transition"
