@@ -1,23 +1,17 @@
 /**
- * Root Page Component
- * 
- * This is the main landing page of the portfolio website. It serves as the entry point
- * and showcases the key sections of the portfolio including the profile and projects.
- * 
- * Features:
- * - Profile section with customizable display options
- * - Visual separator using Line component
- * - Project showcase section
- * - Responsive layout with flex positioning
- * - SEO optimization for better visibility
- * 
- * @returns {JSX.Element} The main landing page layout
+ * Home page: a single scrolling page with every section of the portfolio.
+ * All content is loaded from the database through the public /api routes.
  */
 
 import { Metadata } from "next";
-import Profile from "@/components/custom/herosection/Profile";
-import { Line } from "@/components/custom/navbar/line";
-import ProjectLayout from "@/components/custom/projects/project-layout";
+import Hero from "@/components/custom/site/Hero";
+import WorkSection from "@/components/custom/site/WorkSection";
+import SkillsMarquee from "@/components/custom/site/SkillsMarquee";
+import AboutSection from "@/components/custom/site/AboutSection";
+import JourneySection from "@/components/custom/site/JourneySection";
+import ServicesSection from "@/components/custom/site/ServicesSection";
+import ContactSection from "@/components/custom/site/ContactSection";
+import SiteFooter from "@/components/custom/site/SiteFooter";
 
 // SEO metadata for the root page
 export const metadata: Metadata = {
@@ -65,19 +59,15 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <section className="w-full h-full flex-center flex-col">
-      {/* Profile Section with customizable display options */}
-      <Profile 
-        showProfilePicture={true} 
-        textAlignment="text-balance" 
-        showButtons
-      />
-      
-      {/* Visual Separator */}
-      <Line />
-      
-      {/* Project Showcase Section */}
-      <ProjectLayout />
-    </section>
+    <main>
+      <Hero />
+      <WorkSection limit={4} />
+      <SkillsMarquee />
+      <AboutSection />
+      <JourneySection />
+      <ServicesSection />
+      <ContactSection />
+      <SiteFooter />
+    </main>
   );
 }

@@ -2,7 +2,6 @@
 
 import RegisterForm from "@/components/custom/auth/register-form";
 import SimpleFooter from "@/components/custom/footer/SimpleFooter";
-import Navbar from "@/components/custom/navbar/Navbar";
 import { useEffect } from "react";
 
 export default function Home() {
@@ -38,8 +37,6 @@ export default function Home() {
 
   return (
     <>
-      {/* Navigation bar */}
-      <Navbar/>
       <section className="w-full md:h-[90vh] h-full lg:mt-0 mt-10 flex-center gap-y-6 flex-col lg:flex-row">
         {/* Footer with informative messages */}
         <SimpleFooter FirstPara={firstPara} SecondPara={secondPara} />

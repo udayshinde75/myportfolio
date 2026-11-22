@@ -1,10 +1,7 @@
-import Career from "@/components/custom/about/Career";
-import Education from "@/components/custom/about/Education";
-import Profile from "@/components/custom/herosection/Profile";
-import { Line } from "@/components/custom/navbar/line";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import AboutSection from "@/components/custom/site/AboutSection";
+import JourneySection from "@/components/custom/site/JourneySection";
+import ContactSection from "@/components/custom/site/ContactSection";
+import SiteFooter from "@/components/custom/site/SiteFooter";
 import { Metadata } from "next";
 
 /**
@@ -57,38 +54,15 @@ export const metadata: Metadata = {
 };
 
 /**
- * AboutPage Component
- * 
- * Renders the About page of the portfolio website, showcasing:
- * - Professional profile information
- * - Career history and experience
- * - Educational background
- * - Navigation to Services page
- * 
- * @returns {JSX.Element} The About page layout
+ * About page: bio and stats, then the work & education timeline.
  */
 export default function AboutPage() {
   return (
-    <section className="w-full h-full flex-center flex-col">
-      {/* Profile section with text alignment and no profile picture */}
-      <Profile
-        textAlignment="text-justify"
-        showProfilePicture={false}
-      />
-      <Line />
-      {/* Career history and experience section */}
-      <Career />
-      <Line />
-      {/* Educational background section */}
-      <Education />
-      {/* Navigation button to Services page */}
-      <div className="flex flex-col gap-4 justify-center">
-        <Button asChild variant={"secondary"} className=" text-sm">
-          <Link href="/services">
-            Services<ArrowRight className="w-4 h-4" />
-          </Link>
-        </Button>
-      </div>
-    </section>
+    <main className="pt-16">
+      <AboutSection />
+      <JourneySection />
+      <ContactSection />
+      <SiteFooter />
+    </main>
   );
 }

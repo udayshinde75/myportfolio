@@ -1,9 +1,44 @@
-import Navbar from "@/components/custom/navbar/Navbar";
-import Scene3DBackground from "@/components/custom/3d/Scene3DBackground";
+import SiteNav from "@/components/custom/site/SiteNav";
 import "@/styles/globals.css";
 import { Toaster } from 'sonner';
 import { ReactNode } from "react";
-import { Metadata } from "next";
+import { Metadata, Viewport } from "next";
+import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from "next/font/google";
+
+// Typefaces: a tight grotesk for display/body, a mono for small labels and
+// an italic serif for accents. Exposed as CSS variables for Tailwind.
+const sans = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+});
+
+// Applies the saved theme before first paint so there's no flash.
+// Dark is the default; the choice is stored by the theme switch in the nav.
+const themeScript = `(function(){try{var t=localStorage.getItem('ui-theme');document.documentElement.classList.toggle('dark',t!=='light');}catch(e){document.documentElement.classList.add('dark');}})();`;
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ee" },
+  ],
+};
 
 // SEO and metadata configuration for the entire application
 export const metadata: Metadata = {
@@ -98,17 +133,19 @@ export default function RootLayout({
   children: ReactNode;
 }) {
   return (
-    <html lang="en">
-        <body
-          // Main layout styling with dark mode support and gradient background
-          className="transition-colors duration-1000 flex h-full items-center justify-center flex-col relative bg-gradient-to-br from-gray-300/80 dark:from-gray-900/90 via-gray-300/80 dark:via-gray-900/90 to-gray-300/80 dark:to-gray-900/90 py-12 pb-32"
-        >
-          {/* Persistent 3D WebGL background shared by every page */}
-          <Scene3DBackground />
-          <Navbar/>
+    <html
+      lang="en"
+      className={`dark ${sans.variable} ${mono.variable} ${serif.variable}`}
+      suppressHydrationWarning
+    >
+        <head>
+          <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        </head>
+        <body className="min-h-screen overflow-x-clip">
+          <SiteNav />
           {children}
           {/* Toast notifications component for user feedback */}
-          <Toaster position="top-center" richColors />
+          <Toaster position="bottom-center" />
         </body>
     </html>
   );

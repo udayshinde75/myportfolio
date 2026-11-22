@@ -11,9 +11,9 @@
  * 
  * @returns {JSX.Element} The services page layout
  */
-import Profile from "@/components/custom/herosection/Profile";
-import { Line } from "@/components/custom/navbar/line";
-import ServiceLayout from "@/components/custom/services/service-layout";
+import ServicesSection from "@/components/custom/site/ServicesSection";
+import ContactSection from "@/components/custom/site/ContactSection";
+import SiteFooter from "@/components/custom/site/SiteFooter";
 import { Metadata } from 'next';
 
 /**
@@ -34,13 +34,10 @@ export const metadata: Metadata = {
 export default function Services() {
 
   return (
-    <section className="w-full h-full flex-center flex-col ">
-      {/* Profile section with service-specific configuration */}
-      <Profile textAlignment="text-justify" showProfilePicture={false} showBio={false} showService={true}/>
-      <Line />
-      {/* Main services layout */}
-      <ServiceLayout />
-      <Line />
-    </section>
+    <main className="pt-16">
+      <ServicesSection />
+      <ContactSection />
+      <SiteFooter />
+    </main>
   );
 }

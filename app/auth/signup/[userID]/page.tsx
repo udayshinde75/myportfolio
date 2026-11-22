@@ -2,7 +2,6 @@
 
 import RegisterForm from "@/components/custom/auth/register-form";
 import SimpleFooter from "@/components/custom/footer/SimpleFooter";
-import Navbar from "@/components/custom/navbar/Navbar";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -99,7 +98,6 @@ export default function SignUpPage({ params }: { params: Promise<{ userID?: stri
 
   return (
     <>
-      <Navbar />
       <section className="w-full md:h-[90vh] h-full lg:mt-0 mt-10 flex flex-col lg:flex-row items-center justify-center gap-y-6">
         <SimpleFooter FirstPara={content.firstPara} SecondPara={content.secondPara} />
         <RegisterForm />

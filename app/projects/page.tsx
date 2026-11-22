@@ -9,7 +9,9 @@
  * 
  * @returns {JSX.Element} The projects page layout
  */
-import ProjectLayout from "@/components/custom/projects/project-layout";
+import WorkSection from "@/components/custom/site/WorkSection";
+import ContactSection from "@/components/custom/site/ContactSection";
+import SiteFooter from "@/components/custom/site/SiteFooter";
 import { Metadata } from 'next';
 
 /**
@@ -29,6 +31,10 @@ export const metadata: Metadata = {
 
 export default function ProjectSection() {
   return (
-    <ProjectLayout />
+    <main className="pt-16">
+      <WorkSection label="All projects" title="projects" />
+      <ContactSection />
+      <SiteFooter />
+    </main>
   );
 }

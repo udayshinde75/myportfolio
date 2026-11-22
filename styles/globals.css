@@ -1,162 +1,156 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+/*
+  Design tokens
+  -------------
+  Editorial, near-monochrome palette with a single hot accent.
+  Values are HSL triplets so they work with Tailwind's hsl(var(--x) / <alpha>)
+  pattern and with the shadcn/ui components used by the dashboard.
+  Dark is the default theme (see the inline script in app/layout.tsx).
 */
+@layer base {
+  :root {
+    --background: 40 20% 95%;
+    --foreground: 0 0% 7%;
+    --card: 40 22% 98%;
+    --card-foreground: 0 0% 7%;
+    --popover: 40 22% 98%;
+    --popover-foreground: 0 0% 7%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 40 20% 95%;
+    --secondary: 40 10% 89%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 40 10% 89%;
+    --muted-foreground: 0 0% 36%;
+    --accent: 40 10% 89%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 8% 80%;
+    --input: 40 8% 80%;
+    --ring: 0 0% 20%;
+    --hot: 12 100% 52%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.75rem;
+  }
 
-body {
-  @apply bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300;
-}
-
-.main {
-  width: 100vw;
-  min-height: 100vh;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  padding: 120px 24px 160px 24px;
-  pointer-events: none;
-}
-
-.main:before {
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0, #fafafa 100%);
-  position: absolute;
-  content: "";
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  top: 0;
-}
-
-.main:after {
-  content: "";
-  background-image: url("/assets/images/grid.svg");
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  opacity: 0.4;
-  filter: invert(1);
-}
-
-.gradient {
-  height: fit-content;
-  z-index: 3;
-  width: 100%;
-  max-width: 640px;
-  background-image: radial-gradient(
-      at 27% 37%,
-      hsla(215, 98%, 61%, 1) 0px,
-      transparent 0%
-    ),
-    radial-gradient(at 97% 21%, rgb(14, 23, 15) 0px, transparent 50%),
-    radial-gradient(at 52% 99%, hsla(354, 98%, 61%, 1) 0px, transparent 50%),
-    radial-gradient(at 10% 29%, hsla(256, 96%, 67%, 1) 0px, transparent 50%),
-    radial-gradient(at 97% 96%, hsla(38, 60%, 74%, 1) 0px, transparent 50%),
-    radial-gradient(at 33% 50%, hsla(222, 67%, 73%, 1) 0px, transparent 50%),
-    radial-gradient(at 79% 53%, hsla(343, 68%, 79%, 1) 0px, transparent 50%);
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 100%;
-  filter: blur(100px) saturate(150%);
-  top: 80px;
-  opacity: 0.15;
-}
-
-@media screen and (max-width: 640px) {
-  .main {
-    padding: 0;
+  .dark {
+    --background: 0 0% 6.5%;
+    --foreground: 0 0% 92%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 92%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 92%;
+    --primary: 0 0% 92%;
+    --primary-foreground: 0 0% 7%;
+    --secondary: 0 0% 13%;
+    --secondary-foreground: 0 0% 92%;
+    --muted: 0 0% 13%;
+    --muted-foreground: 0 0% 56%;
+    --accent: 0 0% 13%;
+    --accent-foreground: 0 0% 92%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 17%;
+    --input: 0 0% 17%;
+    --ring: 0 0% 70%;
+    --hot: 12 100% 56%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-/* Tailwind Styles */
+@layer base {
+  * {
+    @apply border-border;
+  }
 
-.app {
-  @apply relative z-10 flex justify-center items-center flex-col w-full mx-auto sm:px-16 px-6;
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+    transition: background-color 400ms ease, color 400ms ease;
+  }
+
+  ::selection {
+    background: hsl(var(--hot));
+    color: hsl(0 0% 100%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
-.black_btn {
-  @apply rounded-full border border-black bg-black py-1.5 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-sm font-inter flex items-center justify-center;
+@layer components {
+  /* Page-width wrapper with fluid side gutters */
+  .shell {
+    @apply mx-auto w-full max-w-[1680px];
+    padding-left: clamp(1rem, 3.2vw, 2.75rem);
+    padding-right: clamp(1rem, 3.2vw, 2.75rem);
+  }
+
+  /* Small mono caps label, e.g. "(SELECTED PROJECTS)" */
+  .label {
+    @apply font-mono text-[11px] uppercase leading-relaxed tracking-[0.18em] text-muted-foreground;
+  }
+
+  /* Oversized display headings ("work", "journey", ...) */
+  .display {
+    @apply font-sans font-medium;
+    letter-spacing: -0.065em;
+    line-height: 0.82;
+  }
+
+  /* Rounded outline chip used for tags and small meta */
+  .chip {
+    @apply inline-flex items-center rounded-full border border-foreground/15 px-3 py-1 text-xs text-foreground/80;
+  }
+
+  .chip-mono {
+    @apply inline-flex items-center rounded-full border border-foreground/20 px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.16em] text-foreground/85 backdrop-blur-sm;
+  }
+
+  /* Link with an underline that draws in on hover */
+  .link-draw {
+    @apply relative inline-flex items-center gap-1.5;
+  }
+  .link-draw::after {
+    content: "";
+    @apply absolute -bottom-0.5 left-0 h-px w-full origin-right scale-x-0 bg-current transition-transform duration-500 ease-out;
+  }
+  .link-draw:hover::after,
+  .link-draw:focus-visible::after {
+    @apply origin-left scale-x-100;
+  }
 }
 
-.outline_btn {
-  @apply rounded-full border border-black bg-transparent py-1.5 px-5 text-black transition-all hover:bg-black hover:text-white text-center text-sm font-inter flex items-center justify-center;
-}
-
-.head_text {
-  @apply mt-5 text-4xl font-extrabold leading-[1.15] text-black sm:text-5xl;
-}
-
-.orange_gradient {
-  @apply bg-gradient-to-r from-amber-500 via-orange-600 to-yellow-500 bg-clip-text text-transparent;
-}
-
-.green_gradient {
-  @apply bg-gradient-to-r from-green-400 to-green-500 bg-clip-text text-transparent;
-}
-
-.blue_gradient {
-  @apply bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent;
-}
-
-.desc {
-  @apply mt-5 text-lg text-gray-600 sm:text-xl max-w-2xl;
-}
-
-.search_input {
-  @apply block w-full rounded-md border border-gray-200 bg-white py-2.5 font-satoshi pl-5 pr-12 text-sm shadow-lg font-medium focus:border-black focus:outline-none focus:ring-0;
-}
-
-.copy_btn {
-  @apply w-7 h-7 rounded-full bg-white/10 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur flex justify-center items-center cursor-pointer;
-}
-
-.glassmorphism {
-  @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
-}
-
-.prompt_layout {
-  @apply space-y-6 py-8 sm:columns-2 sm:gap-6 xl:columns-3;
-}
-
-/* Feed Component */
-.feed {
-  @apply mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
-}
-
-/* Form Component */
-.form_textarea {
-  @apply w-full flex rounded-lg h-[200px] mt-2 p-3 text-sm text-gray-500 outline-0;
-}
-
-.form_input {
-  @apply w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0;
-}
-
-/* Nav Component */
-.logo_text {
-  @apply max-sm:hidden font-satoshi font-semibold text-lg text-black tracking-wide;
-}
-
-.dropdown {
-  @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
-}
-
-.dropdown_link {
-  @apply text-sm font-inter text-gray-700 hover:text-gray-500 font-medium;
-}
-
-/* PromptCard Component */
-.prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
-}
-
+/* ---------------------------------------------------------------
+   Layout helpers still used by the dashboard and auth pages
+---------------------------------------------------------------- */
 .flex-center {
   @apply flex justify-center items-center;
 }
@@ -173,96 +167,31 @@ body {
   @apply flex justify-between items-center;
 }
 
-/* 
-  ---break--- 
-*/
-
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-  }
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
-
-/* 
-  ---break--- 
-*/
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
 .container-width {
-  @apply w-[85%] max-w-[1000px]
+  @apply w-[85%] max-w-[1000px];
 }
 
-/* Layered "floating" 3D shadow used on the navbar chrome */
 .shadow-3d {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.15) inset,
     0 10px 15px -3px rgba(0, 0, 0, 0.2),
-    0 4px 6px -4px rgba(0, 0, 0, 0.2),
-    0 25px 35px -10px rgba(99, 102, 241, 0.25);
+    0 4px 6px -4px rgba(0, 0, 0, 0.2);
 }
 
-.dark .shadow-3d {
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.05) inset,
-    0 10px 15px -3px rgba(0, 0, 0, 0.5),
-    0 4px 6px -4px rgba(0, 0, 0, 0.5),
-    0 25px 35px -10px rgba(129, 140, 248, 0.35);
+/* Marquee pauses while hovered */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Custom <details> toggles: hide Safari's default marker */
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Hide scrollbars on horizontally scrolling chip rows */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -5,21 +5,42 @@ module.exports = {
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
   	extend: {
   		fontFamily: {
+  			// Font CSS variables are provided by next/font in app/layout.tsx
+  			sans: [
+  				'var(--font-sans)',
+  				'ui-sans-serif',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			mono: [
+  				'var(--font-mono)',
+  				'ui-monospace',
+  				'SFMono-Regular',
+  				'monospace'
+  			],
+  			serif: [
+  				'var(--font-serif)',
+  				'ui-serif',
+  				'Georgia',
+  				'serif'
+  			],
   			satoshi: [
   				'Satoshi',
   				'sans-serif'
   			],
   			inter: [
-  				'Inter',
+  				'var(--font-sans)',
   				'sans-serif'
   			]
   		},
   		colors: {
   			'primary-orange': '#FF5722',
+  			hot: 'hsl(var(--hot))',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
@@ -82,11 +103,49 @@ module.exports = {
   				to: {
   					height: '0'
   				}
+  			},
+  			marquee: {
+  				from: {
+  					transform: 'translateX(0)'
+  				},
+  				to: {
+  					transform: 'translateX(-50%)'
+  				}
+  			},
+  			meridian: {
+  				'0%, 100%': {
+  					transform: 'scaleX(1)'
+  				},
+  				'50%': {
+  					transform: 'scaleX(0.02)'
+  				}
+  			},
+  			'pulse-dot': {
+  				'0%': {
+  					transform: 'scale(1)',
+  					opacity: '0.6'
+  				},
+  				'100%': {
+  					transform: 'scale(3)',
+  					opacity: '0'
+  				}
+  			},
+  			'scroll-cue': {
+  				'0%, 100%': {
+  					transform: 'translateY(0)'
+  				},
+  				'50%': {
+  					transform: 'translateY(4px)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			marquee: 'marquee 45s linear infinite',
+  			meridian: 'meridian 9s ease-in-out infinite',
+  			'pulse-dot': 'pulse-dot 1.8s ease-out infinite',
+  			'scroll-cue': 'scroll-cue 1.6s ease-in-out infinite'
   		}
   	}
   },
